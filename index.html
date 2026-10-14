@@ -1,0 +1,1054 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nuestros Gatitos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: near-black hero, centered type, a giant gradient wordmark with the cat cut-out standing in front of it; alternating black and light bands below. */
+:root {
+  --bg: #F4F5F2;
+  --surface: #FFFFFF;
+  --surface-2: #EBEFEA;
+  --ink: #101A16;
+  --muted: #5B6A61;
+  --line: #DBE1DA;
+  --accent: #1B3F30;
+  --accent-ink: #F5F8F2;
+  --ok: #1F7A4D;
+  --warn: #9A6200;
+  --bad: #8A3A2B;
+  /* dark bands: same in both themes */
+  --black: #050B08;
+  --black-2: #0C1612;
+  --on-black: #F3F6F7;
+  --on-black-mute: #98A89F;
+  --line-black: rgba(255,255,255,.12);
+  --warm: #F0AE86;
+  --cream: #F6EFE6;
+  --font: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1210; --surface: #111C16; --surface-2: #17251E; --ink: #EFF2EC; --muted: #9DAEA3; --line: #23332B;
+    --accent: #CFE6D8; --accent-ink: #0A1210; --ok: #7FD1A0; --warn: #E7B857; --bad: #E58C79; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A1210; --surface: #111C16; --surface-2: #17251E; --ink: #EFF2EC; --muted: #9DAEA3; --line: #23332B;
+  --accent: #CFE6D8; --accent-ink: #0A1210; --ok: #7FD1A0; --warn: #E7B857; --bad: #E58C79; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+h1, h2, h3 { margin: 0; line-height: 1.05; text-wrap: balance; letter-spacing: -0.03em; font-weight: 600; }
+h2 { font-size: clamp(2rem, 5vw, 3.4rem); }
+h3 { font-size: 1.25rem; letter-spacing: -0.015em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; border-radius: 8px; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-inline: 20px; }
+section { padding-block: 112px 0; scroll-margin-top: 56px; }
+.eyebrow { font-size: .8rem; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); font-weight: 600; }
+.lead { color: var(--muted); font-size: 1.2rem; max-width: 56ch; }
+.center { text-align: center; justify-items: center; }
+.sec-head { display: grid; gap: 14px; margin-bottom: 44px; }
+
+/* nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: rgba(5,11,6,.82); backdrop-filter: saturate(180%) blur(18px); -webkit-backdrop-filter: saturate(180%) blur(18px); border-bottom: 1px solid var(--line-black); }
+.nav-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 52px; }
+.brand { font-weight: 600; font-size: 1.05rem; letter-spacing: -.02em; text-decoration: none; color: var(--on-black); }
+.links { display: flex; gap: 30px; font-size: .86rem; }
+.links a { text-decoration: none; color: var(--on-black-mute); transition: color .2s; }
+.links a:hover { color: var(--on-black); }
+@media (max-width: 800px) { .links { display: none; } }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 14px 28px; font: 500 1.05rem var(--font); text-decoration: none; border: 1.5px solid transparent; cursor: pointer; transition: transform .2s, background .2s, border-color .2s; letter-spacing: -.01em; }
+.btn:hover { transform: scale(1.03); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-cream { background: var(--cream); color: #1B1209; }
+.btn-line { border-color: rgba(255,255,255,.45); color: var(--on-black); background: transparent; }
+.btn-line:hover { border-color: #fff; }
+.btn-sm { padding: 7px 16px; font-size: .84rem; }
+
+/* hero */
+.hero-band { background: var(--black); color: var(--on-black); position: relative; overflow: hidden; --W: clamp(3.4rem, 21vw, 16.5rem); --C: clamp(210px, 38vw, 440px); }
+.hero { display: grid; justify-items: center; text-align: center; padding-top: clamp(48px, 8vw, 88px); }
+.hero .eyebrow { color: var(--on-black-mute); margin-bottom: 18px; }
+.hero h1 { font-size: clamp(2.7rem, 7.4vw, 5.6rem); font-weight: 700; letter-spacing: -.04em; max-width: 14ch; color: var(--on-black); animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+.tagline { font-size: clamp(1.4rem, 3.4vw, 2.2rem); font-weight: 400; letter-spacing: -.02em; color: var(--on-black-mute); margin-top: 14px; animation: rise .9s .12s cubic-bezier(.2,.7,.2,1) both; }
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 30px; animation: rise .9s .24s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+.stage { position: relative; width: 100%; margin-top: clamp(24px, 5vw, 56px); height: calc(var(--C) * 1.336 + var(--W) * .34); display: grid; justify-items: center; }
+.stage::before { content: ""; position: absolute; left: 50%; bottom: 0; width: min(900px, 120%); height: 70%; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(240,174,134,.2), transparent); pointer-events: none; }
+.word { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font: 700 var(--W)/.82 var(--font); text-transform: uppercase; letter-spacing: -.045em; white-space: nowrap; user-select: none; background: linear-gradient(180deg, #FBF1E4 0%, #A9CDB9 34%, #3C6250 70%, #0C1A13 100%); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .04em; animation: fadein 1.4s .1s both; filter: drop-shadow(0 0 50px rgba(169,205,185,.12)); }
+.cat { position: absolute; left: 50%; bottom: calc(var(--W) * .3); width: calc(var(--C) * .775); aspect-ratio: 796 / 1372; max-width: 100%; margin-left: calc(var(--C) * -.3875); filter: drop-shadow(0 34px 40px rgba(0,0,0,.65)); animation: climb 1.4s .15s cubic-bezier(.2,.7,.2,1) both; will-change: transform; }
+.cat img { width: 100%; height: 100%; display: block; }
+@keyframes climb { from { opacity: 0; transform: translateY(70px); } to { opacity: 1; transform: none; } }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+/* video reel */
+.reel-sec { padding-block: clamp(56px, 9vw, 110px) clamp(72px, 10vw, 130px); }
+.reel-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+.reel-head .sec-head { margin: 0; }
+.reel-head h2 { color: var(--on-black); font-size: clamp(2.2rem, 6vw, 4rem); letter-spacing: -.04em; }
+.reel-head .eyebrow { color: var(--on-black-mute); }
+.reel-track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 6px; }
+.reel-track::-webkit-scrollbar { display: none; }
+.reel { position: relative; flex: 0 0 min(370px, 80%); aspect-ratio: 9 / 16; border-radius: 32px; overflow: hidden; background: var(--black-2); scroll-snap-align: start; border: 0; padding: 0; cursor: pointer; color: #fff; font: inherit; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
+.reel:hover { transform: scale(1.015); }
+.reel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.reel::after { content: ""; position: absolute; inset: auto 0 0 0; height: 32%; background: linear-gradient(to top, rgba(0,0,0,.6), transparent); pointer-events: none; }
+.reel .tag { position: absolute; left: 16px; bottom: 16px; z-index: 1; display: inline-flex; gap: 8px; align-items: center; background: rgba(0,0,0,.42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: 8px 14px; font-size: .84rem; font-weight: 500; }
+.lb { position: fixed; inset: 0; z-index: 60; background: rgba(8,13,11,.5); backdrop-filter: blur(22px) saturate(130%); -webkit-backdrop-filter: blur(22px) saturate(130%); display: grid; place-items: center; padding: 16px; touch-action: pan-y; }
+.lb video { max-height: 80vh; max-height: 80dvh; max-width: min(100%, 520px); width: auto; height: auto; border-radius: 28px; background: #000; display: block; box-shadow: 0 30px 90px rgba(0,0,0,.45); }
+.lb img { max-height: 80vh; max-height: 80dvh; max-width: min(100%, 1100px); width: auto; height: auto; border-radius: 28px; display: block; object-fit: contain; box-shadow: 0 30px 90px rgba(0,0,0,.45); }
+.lb-c { position: absolute; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); color: var(--on-black-mute); font-size: .88rem; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+.more-h { display: flex; align-items: baseline; gap: 14px; margin: clamp(44px, 7vw, 80px) 0 22px; color: var(--on-black); }
+.more-h h3 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); letter-spacing: -.03em; font-weight: 600; }
+.more-h span { color: var(--on-black-mute); font-size: .9rem; }
+.vgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 900px) { .vgrid { grid-template-columns: repeat(2, 1fr); } }
+.vgrid .reel { flex: none; width: 100%; border-radius: 26px; }
+/* galeria: mosaico -> miniaturas -> completo */
+.gal { position: relative; }
+.gal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; overflow: hidden; border-radius: 18px; }
+.gal-grid button { position: relative; padding: 0; border: 0; background: var(--black-2); aspect-ratio: 1; overflow: hidden; cursor: pointer; border-radius: 4px; -webkit-tap-highlight-color: transparent; }
+.gal-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gal[data-mode="wall"] .gal-grid button { pointer-events: none; }
+.gal[data-mode="grid"] .gal-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; border-radius: 0; overflow: visible; }
+.gal[data-mode="grid"] .gal-grid button { border-radius: 16px; }
+.gal[data-mode="grid"] .gal-grid button:active { transform: scale(.97); }
+@media (min-width: 700px) { .gal-grid { grid-template-columns: repeat(13, 1fr); } .gal[data-mode="grid"] .gal-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; } }
+@media (min-width: 1000px) { .gal[data-mode="grid"] .gal-grid { grid-template-columns: repeat(6, 1fr); } }
+.gal-hint { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; gap: 2px; justify-items: center; padding: 14px 24px; border-radius: 999px; border: 1px solid rgba(255,255,255,.28); background: rgba(5,11,6,.62); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: #fff; font: 600 1rem var(--font); cursor: pointer; }
+.gal-hint b { font-weight: 500; font-size: .8rem; color: var(--on-black-mute); }
+.gal:not([data-mode="wall"]) .gal-hint { display: none; }
+.gal-grid .num, .mason .num { position: absolute; left: 6px; top: 6px; background: rgba(0,0,0,.7); color: #fff; font: 600 .72rem var(--font); padding: 2px 7px; border-radius: 999px; pointer-events: none; }
+.gal-act { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 18px; }
+.gbtn { border: 0; border-radius: 999px; padding: 11px 16px; min-height: 44px; font: 600 .9rem var(--font); background: #f3ede2; color: #111; cursor: pointer; }
+.gbtn.ghost { background: transparent; color: #fff; border: 1px solid var(--line-black); }
+.mason { columns: 2; column-gap: 10px; }
+@media (min-width: 700px) { .mason { columns: 3; column-gap: 16px; } }
+.mason button { position: relative; display: block; width: 100%; margin: 0 0 10px; padding: 0; border: 0; border-radius: 20px; overflow: hidden; cursor: zoom-in; background: var(--black-2); break-inside: avoid; }
+@media (min-width: 700px) { .mason button { margin-bottom: 16px; border-radius: 26px; } }
+.mason img { width: 100%; height: auto; display: block; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+@media (hover: hover) { .mason button:hover img { transform: scale(1.04); } }
+.lb button { position: absolute; border: 1px solid var(--line-black); background: rgba(255,255,255,.08); color: #fff; border-radius: 999px; font: 500 .95rem var(--font); cursor: pointer; backdrop-filter: blur(8px); }
+.lb .x { top: calc(16px + env(safe-area-inset-top, 0px)); right: 16px; padding: 9px 18px; }
+.lb .p, .lb .n { top: 50%; width: 48px; height: 48px; margin-top: -24px; font-size: 1.2rem; }
+.lb .p { left: 16px; }
+.lb .n { right: 16px; }
+@media (max-width: 700px) { .lb .p, .lb .n { top: auto; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); margin-top: 0; } }
+
+/* statement */
+.statement { padding-block: 120px 0; }
+.statement h2 { max-width: 20ch; }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 64px; border-top: 1px solid var(--line); }
+.facts div { padding: 24px 20px 4px; border-inline-start: 1px solid var(--line); text-align: left; }
+.facts div:first-child { border-inline-start: 0; padding-inline-start: 0; }
+.facts b { display: block; font-size: 1.15rem; letter-spacing: -.02em; font-weight: 600; margin-bottom: 4px; }
+.facts span { color: var(--muted); font-size: .95rem; }
+@media (max-width: 860px) { .facts { grid-template-columns: 1fr 1fr; } .facts div:nth-child(3) { border-inline-start: 0; padding-inline-start: 0; } .facts div:nth-child(n+3) { border-top: 1px solid var(--line); margin-top: 20px; } }
+
+/* black band + gallery */
+.band { background: var(--black); color: var(--on-black); margin-top: 120px; padding-block: 112px; }
+.band .eyebrow { color: var(--on-black-mute); }
+.band .lead { color: var(--on-black-mute); }
+.strip-bar { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 36px; }
+.arrows { display: flex; gap: 10px; }
+.arr { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-black); background: var(--black-2); color: var(--on-black); font-size: 1.1rem; cursor: pointer; transition: background .2s; }
+.arr:hover { background: #1B2A24; }
+.strip { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; scrollbar-width: none; }
+.strip::-webkit-scrollbar { display: none; }
+.strip figure { margin: 0; flex: 0 0 min(260px, 74%); aspect-ratio: 3 / 4; border-radius: 28px; overflow: hidden; scroll-snap-align: start; background: var(--black-2); }
+.strip img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.strip figure:hover img { transform: scale(1.05); }
+
+/* breeds */
+.breeds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .breeds { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .breeds { grid-template-columns: 1fr; } }
+.breed { background: var(--surface); border-radius: 28px; padding: 30px 28px; display: grid; gap: 10px; align-content: start; min-width: 0; transition: transform .3s; }
+.breed:hover { transform: translateY(-4px); }
+.breed .tag { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; font-weight: 600; }
+.breed h3 { font-size: 1.7rem; letter-spacing: -.03em; }
+.breed p { color: var(--muted); font-size: .98rem; }
+.breed button { justify-self: start; margin-top: 8px; background: none; border: 0; padding: 0; color: var(--ink); font: 500 .98rem var(--font); text-decoration: underline; text-underline-offset: 5px; cursor: pointer; }
+.others { margin-top: 24px; color: var(--muted); font-size: .98rem; }
+
+/* catalog */
+.demo-note { background: var(--surface-2); border-radius: 16px; padding: 14px 18px; font-size: .94rem; margin-bottom: 22px; color: var(--muted); }
+.demo-note b { color: var(--ink); }
+.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; align-items: center; }
+.chip { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 9px 18px; font: 500 .94rem var(--font); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+select { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 9px 16px; font: 500 .94rem var(--font); max-width: 100%; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+.card { background: var(--surface); border: 0; border-radius: 28px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; text-align: left; padding: 0; cursor: pointer; font: inherit; color: inherit; min-width: 0; transition: transform .3s; }
+.card:hover { transform: translateY(-4px); }
+.ph { aspect-ratio: 4 / 3; max-width: 100%; background: var(--surface-2); display: grid; place-items: center; position: relative; }
+.ph svg { width: 44%; height: auto; }
+.ph span { position: absolute; left: 14px; bottom: 12px; font-size: .76rem; color: var(--muted); }
+.pill { position: absolute; right: 12px; top: 12px; font-size: .76rem; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: var(--surface); }
+.pill[data-s="Disponible"] { color: var(--ok); }
+.pill[data-s="En proceso de reserva"] { color: var(--warn); }
+.pill[data-s="Reservado"] { color: var(--bad); }
+.pill[data-s="Próxima camada"] { color: var(--muted); }
+.card-b { padding: 18px 22px 22px; display: grid; gap: 4px; align-content: start; }
+.card-b h3 { font-size: 1.15rem; }
+.card-b p { color: var(--muted); font-size: .92rem; }
+.empty { padding: 36px; text-align: center; color: var(--muted); border: 1.5px dashed var(--line); border-radius: 24px; }
+
+/* modal */
+.modal { position: fixed; inset: 0; z-index: 50; background: rgba(4,9,7,.7); backdrop-filter: blur(6px); display: grid; place-items: center; padding: 16px; }
+.sheet { background: var(--bg); border-radius: 32px; max-width: 780px; width: 100%; max-height: 92%; overflow: auto; display: grid; grid-template-columns: 1fr 1fr; }
+@media (max-width: 640px) { .sheet { grid-template-columns: 1fr; } }
+.sheet .ph { aspect-ratio: auto; min-height: 240px; height: 100%; }
+.sheet-b { padding: 28px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.close { justify-self: end; background: var(--surface); border: 0; border-radius: 999px; color: var(--ink); padding: 7px 16px; font: 500 .9rem var(--font); cursor: pointer; }
+dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; font-size: .96rem; }
+dt { color: var(--muted); }
+dd { margin: 0; }
+.pend { color: var(--muted); font-style: italic; }
+.sheet .bph { height: 260px; min-height: 0; overflow: hidden; }
+@media (min-width: 641px) { .sheet .bph { height: 100%; min-height: 380px; } }
+.bph { position: relative; background: var(--surface-2); display: grid; place-items: center; }
+.bph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; padding: 14px; }
+.bph .pill { position: absolute; left: 14px; top: 14px; right: auto; }
+.price-note { font-size: .9rem; color: var(--muted); }
+
+/* process */
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; max-width: 760px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 56px 1fr; gap: 18px; padding-block: 24px; border-bottom: 1px solid var(--line); }
+.steps li::before { content: counter(s); font-size: 2.2rem; font-weight: 600; letter-spacing: -.04em; color: var(--muted); line-height: 1; }
+.steps b { display: block; font-size: 1.25rem; letter-spacing: -.02em; font-weight: 600; }
+.steps span { color: var(--muted); font-size: 1rem; }
+.inc { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 40px; }
+.inc div { background: var(--surface); border-radius: 24px; padding: 24px; min-width: 0; }
+.inc b { display: block; font-weight: 600; letter-spacing: -.01em; margin-bottom: 6px; }
+.inc span { color: var(--muted); font-size: .95rem; }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+.panel { background: var(--surface); border-radius: 32px; padding: 36px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.panel p, .panel li { color: var(--muted); font-size: 1rem; }
+.panel h3 { font-size: 1.6rem; letter-spacing: -.03em; }
+.panel ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; }
+
+details { border-bottom: 1px solid var(--line); padding-block: 20px; max-width: 780px; }
+summary { font-size: 1.2rem; font-weight: 600; letter-spacing: -.02em; cursor: pointer; }
+details p { color: var(--muted); margin-top: 10px; }
+
+.contact { text-align: center; justify-items: center; display: grid; gap: 22px; }
+.contact h2 { color: var(--on-black); font-size: clamp(2.2rem, 7vw, 4.6rem); letter-spacing: -.04em; max-width: 14ch; }
+.contact p { color: var(--on-black-mute); max-width: 48ch; }
+.num { font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 600; letter-spacing: -.03em; color: var(--warm); }
+.row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: center; }
+footer { background: var(--black); color: var(--on-black-mute); font-size: .88rem; padding-block: 0 56px; }
+footer .wrap { display: grid; gap: 6px; border-top: 1px solid var(--line-black); padding-top: 32px; }
+footer b { color: var(--on-black); font-weight: 600; }
+
+/* movil: zonas tactiles >= 44px y catalogo mas corto */
+.btn-sm { min-height: 38px; display: inline-flex; align-items: center; }
+.brand { display: inline-flex; align-items: center; min-height: 44px; }
+.breed button { min-height: 44px; padding-block: 10px; }
+.chip, select { min-height: 44px; }
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .card { border-radius: 22px; }
+  .ph span { display: none; }
+  html { -webkit-text-size-adjust: 100%; }
+}
+@media (hover: none) { .card:hover, .reel:hover { transform: none; } }
+
+.pioneer { max-width: 30ch; margin: 22px auto 0; color: var(--on-black); font-size: 1.05rem; font-weight: 500; letter-spacing: -.01em; opacity: .92; text-wrap: balance; }
+.xchips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
+.xchips span { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 12px 22px; font-weight: 600; letter-spacing: -.01em; }
+.price { font-size: clamp(1.7rem, 5vw, 2.4rem); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; margin: 4px 0 10px; }
+.breed .xtag { justify-self: start; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); }
+.exp { max-width: 34ch; margin: 12px auto 0; color: var(--on-black-mute); font-size: .95rem; text-wrap: balance; }
+@media (max-width: 480px) { .hero .eyebrow { font-size: .7rem; letter-spacing: .09em; } }
+
+/* galeria comprimida: pared interactiva con efecto lupa */
+.gal[data-mode="wall"] { padding: 22px 0 30px; touch-action: pan-y; cursor: pointer; user-select: none; -webkit-user-select: none; }
+.gal[data-mode="wall"]::before { content: ""; position: absolute; inset: -6% -4%; background: radial-gradient(ellipse at 50% 45%, rgba(226,168,110,.16), transparent 62%); pointer-events: none; }
+.gal[data-mode="wall"] .gal-grid { gap: 5px; overflow: visible; border-radius: 0; position: relative; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%); }
+.gal[data-mode="wall"] .gal-grid button { border-radius: 9px; }
+.gal-hint { top: auto; bottom: 34px; display: flex; align-items: center; gap: 12px; padding: 12px 20px 12px 14px; text-align: left; z-index: 200; box-shadow: 0 14px 40px rgba(0,0,0,.45); }
+.gal-hint i { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #f3ede2; color: #111; font: 600 1.2rem/1 var(--font); font-style: normal; animation: hintpulse 2.2s ease-in-out infinite; }
+.gal-hint span { font-weight: 600; font-size: .98rem; }
+.gal-hint b { display: block; }
+.gal-hint div { display: grid; gap: 1px; }
+@keyframes hintpulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(243,237,226,.5); } 60% { box-shadow: 0 0 0 11px rgba(243,237,226,0); } }
+.gal-hint { width: max-content; max-width: calc(100vw - 40px); white-space: nowrap; }
+
+/* ===== hero v2: tipografía y color más fuertes ===== */
+:root { --sage: #9CC0AA; --font-display: "Inter Tight", "Instrument Sans", system-ui, sans-serif; }
+h1, h2, h3, .brand { font-family: var(--font-display); }
+h2, h3 { font-weight: 700; }
+.nav { background: rgba(4,9,7,.9); }
+.nav-in { height: 64px; }
+.brand { font-weight: 800; font-size: 1.3rem; letter-spacing: -.035em; }
+.nav-r { display: flex; align-items: center; gap: 12px; }
+.btn-sm { padding: 9px 18px; font-size: .92rem; font-weight: 600; gap: 8px; }
+.ico-wa { width: 1.25em; height: 1.25em; flex: none; }
+.btn-cream .ico-wa { color: #1B1209; }
+.menu-btn { display: none; width: 44px; height: 44px; border: 0; background: transparent; color: var(--on-black); cursor: pointer; border-radius: 12px; }
+.menu-btn svg { width: 28px; height: 28px; }
+.mnav { display: grid; padding: 6px 20px 18px; background: rgba(4,9,7,.97); border-bottom: 1px solid var(--line-black); }
+.mnav[hidden] { display: none; }
+.mnav a { padding: 14px 4px; font: 600 1.1rem var(--font-display); text-decoration: none; color: var(--on-black); border-top: 1px solid var(--line-black); }
+.mnav a:first-child { border-top: 0; }
+@media (min-width: 801px) { .mnav { display: none; } }
+@media (max-width: 800px) { .menu-btn { display: inline-grid; place-items: center; } .nav-r { gap: 6px; } }
+.hero-band { background: radial-gradient(110% 55% at 50% 0%, #10281d 0%, #07120d 42%, #040906 100%); }
+.hero { padding-top: clamp(40px, 7vw, 76px); }
+.hero .eyebrow.loc { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; color: var(--sage); font-weight: 600; letter-spacing: .18em; margin-bottom: clamp(22px, 4vw, 34px); }
+.hero .eyebrow.loc::before, .hero .eyebrow.loc::after { content: ""; flex: 1 1 0; max-width: 120px; height: 1px; background: rgba(156,192,170,.35); }
+.hero .eyebrow .pin { width: 20px; height: 20px; flex: none; }
+.hero h1 { font-weight: 800; font-size: clamp(3rem, 11.5vw, 6.9rem); line-height: .95; letter-spacing: -.055em; max-width: 12ch; }
+.tagline { font-family: var(--font-display); font-weight: 500; font-size: clamp(2.3rem, 9.4vw, 5.5rem); line-height: 1; letter-spacing: -.05em; color: var(--sage); margin-top: 6px; }
+.pioneer { font-size: clamp(1.1rem, 2.6vw, 1.45rem); font-weight: 600; max-width: 34ch; margin-top: clamp(22px, 4vw, 34px); opacity: 1; }
+.exp { color: #8FB09C; font-size: clamp(.98rem, 2.2vw, 1.15rem); max-width: 48ch; margin-top: 12px; line-height: 1.45; }
+.hero-cta { margin-top: clamp(26px, 4vw, 38px); gap: 12px; }
+.hero-cta .btn { padding: 16px 30px; font-weight: 600; gap: 10px; }
+.hero-cta .btn-line { border-color: rgba(156,192,168,.55); }
+.hero-feats { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; max-width: 980px; margin-top: clamp(34px, 5vw, 52px); }
+.hero-feats div { display: grid; justify-items: center; gap: 4px; padding: 6px 14px; border-inline-start: 1px solid rgba(156,192,168,.22); }
+.hero-feats div:first-child { border-inline-start: 0; }
+.hero-feats .ico { width: 36px; height: 36px; color: var(--sage); margin-bottom: 8px; }
+.hero-feats b { font: 700 .74rem var(--font); letter-spacing: .14em; text-transform: uppercase; color: var(--sage); }
+.hero-feats span { color: var(--on-black); font-size: .9rem; line-height: 1.35; max-width: 20ch; }
+@media (max-width: 700px) { .hero-feats { grid-template-columns: 1fr 1fr; row-gap: 22px; } .hero-feats div:nth-child(3) { border-inline-start: 0; } }
+.word { font-family: var(--font-display); font-weight: 800; background: linear-gradient(180deg, #D3E7D7 0%, #86AD95 38%, #3A5E4E 74%, #0E1D17 100%); -webkit-background-clip: text; background-clip: text; }
+.stage::before { background: radial-gradient(closest-side, rgba(156,192,168,.2), transparent); }
+.stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(to top, rgba(0,0,0,.65), transparent), radial-gradient(70% 100% at 50% 100%, rgba(156,192,168,.14), transparent); pointer-events: none; }
+.cat { z-index: 2; }
+
+.stage { margin-top: clamp(40px, 7vw, 72px); }
+.brand { white-space: nowrap; }
+@media (max-width: 520px) {
+  .brand { font-size: 1.12rem; }
+  .btn-sm { padding: 8px 14px; font-size: .86rem; }
+  .hero .eyebrow.loc { font-size: .64rem; letter-spacing: .1em; gap: 8px; }
+  .hero .eyebrow.loc::before, .hero .eyebrow.loc::after { display: none; }
+  .hero .eyebrow .pin { width: 16px; height: 16px; }
+  .hero-feats { grid-template-columns: repeat(4, 1fr); row-gap: 0; }
+  .hero-feats div { padding: 4px 6px; }
+  .hero-feats div:nth-child(3) { border-inline-start: 1px solid rgba(156,192,168,.22); }
+  .hero-feats .ico { width: 28px; height: 28px; margin-bottom: 6px; }
+  .hero-feats b { font-size: .56rem; letter-spacing: .06em; }
+  .hero-feats span { font-size: .68rem; }
+}
+
+/* ===== portada en una sola pantalla ===== */
+.hero { height: max(calc(100vh - 74px), 600px); height: max(calc(100svh - 74px), 600px); display: flex; flex-direction: column; align-items: center; padding-top: clamp(14px, 3.2svh, 40px); padding-bottom: 0; }
+.hero .eyebrow.loc { margin-bottom: clamp(10px, 2.2svh, 26px); }
+.hero h1 { font-size: clamp(2.1rem, min(10.8vw, 5.7svh), 6.9rem); }
+.tagline { font-size: clamp(1.5rem, min(8.2vw, 4.7svh), 5.5rem); margin-top: 2px; white-space: nowrap; }
+.pioneer { font-size: clamp(.95rem, min(4.2vw, 2.5svh), 1.45rem); margin-top: clamp(10px, 2.2svh, 30px); }
+.exp { font-size: clamp(.8rem, min(3.5vw, 2.1svh), 1.15rem); margin-top: clamp(6px, 1.2svh, 12px); }
+.hero-cta { flex-wrap: nowrap; margin-top: clamp(12px, 2.4svh, 34px); gap: 10px; }
+.hero-cta { width: 100%; justify-content: center; }
+.hero-cta .btn { min-width: 0; padding: clamp(10px, 1.7svh, 16px) clamp(10px, 2.4vw, 30px); font-size: clamp(.7rem, 3.05vw, 1.05rem); white-space: nowrap; gap: 6px; }
+.hero-cta .ico-wa { width: 1.15em; height: 1.15em; }
+.hero-feats { margin-top: clamp(14px, 3svh, 46px); }
+.hero-feats div:nth-child(3) { border-inline-start: 1px solid rgba(156,192,168,.22); }
+.hero-feats .ico { width: clamp(24px, 3.6svh, 36px); height: clamp(24px, 3.6svh, 36px); margin-bottom: clamp(3px, .8svh, 8px); }
+.stage { flex: 1 1 auto; height: auto; min-height: 210px; margin-top: clamp(6px, 1.5svh, 24px); container-type: size; align-self: stretch; }
+.word { font-size: min(22cqw, 40cqh); bottom: 7cqh; }
+.cat { --cH: min(98cqh, 175cqw); height: var(--cH); width: calc(var(--cH) * .58); aspect-ratio: auto; left: 0; right: 0; margin-inline: auto; bottom: 0; max-width: none; }
+@media (max-width: 380px) { .hero-feats b { font-size: .52rem; } .hero-feats span { font-size: .64rem; } }
+/* pantallas anchas: texto a la izquierda, gatito a la derecha */
+@media (min-width: 960px) and (min-aspect-ratio: 5/4) {
+  .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); grid-auto-rows: min-content; align-content: center; justify-items: center; column-gap: 24px; padding-top: 0; }
+  .hero > :not(.stage) { grid-column: 1; }
+  .hero .stage { grid-column: 2; grid-row: 1 / span 7; height: 100%; min-height: 0; margin: 0; }
+  .hero { grid-template-rows: repeat(7, min-content); }
+  .hero .eyebrow.loc::before, .hero .eyebrow.loc::after { display: none; }
+  .hero { height: max(calc(100svh - 64px), 560px); }
+  .hero h1 { font-size: clamp(2.6rem, min(5.6vw, 9svh), 6rem); }
+  .tagline { font-size: clamp(1.8rem, min(4.3vw, 6.8svh), 4.7rem); white-space: nowrap; }
+  .pioneer { font-size: clamp(.95rem, 2.4svh, 1.35rem); margin-top: clamp(8px, 2svh, 24px); }
+  .exp { font-size: clamp(.82rem, 1.9svh, 1.05rem); }
+  .hero .eyebrow.loc { margin-bottom: clamp(8px, 2svh, 22px); }
+  .hero-cta { margin-top: clamp(10px, 2.2svh, 26px); }
+  .hero-feats { margin-top: clamp(12px, 2.6svh, 32px); }
+  .hero-feats span { font-size: clamp(.74rem, 1.7svh, .9rem); }
+  .hero-feats b { font-size: clamp(.6rem, 1.5svh, .74rem); }
+  .hero-feats .ico { width: clamp(22px, 3.2svh, 32px); height: clamp(22px, 3.2svh, 32px); }
+  .hero-cta .btn { font-size: 1rem; }
+}
+
+/* portada v3: el gato es el protagonista, menos texto */
+.hero { padding-top: clamp(10px, 2.2svh, 30px); }
+.hero h1 { font-size: clamp(2.1rem, min(10.8vw, 5.6svh), 6.6rem); }
+.tagline { font-size: clamp(1.5rem, min(8.2vw, 4.5svh), 5rem); }
+.pioneer { font-size: clamp(.9rem, min(3.9vw, 2.3svh), 1.3rem); font-weight: 500; opacity: .85; max-width: 30ch; margin-top: clamp(8px, 1.6svh, 22px); }
+.hero-cta { margin-top: clamp(12px, 2.2svh, 26px); }
+.hero-feats { margin-top: clamp(12px, 2.2svh, 28px); }
+.hero-feats div { gap: 0; padding: 2px 4px; }
+.hero-feats .ico { width: clamp(20px, 2.8svh, 28px); height: clamp(20px, 2.8svh, 28px); margin-bottom: 4px; }
+.hero-feats b { font-size: clamp(.5rem, 2.1vw, .68rem); letter-spacing: .08em; line-height: 1.25; }
+.stage { min-height: 0; margin-top: clamp(0px, .6svh, 10px); }
+.cat { --cH: min(104cqh, 190cqw); }
+.cat img { filter: saturate(1.06) contrast(1.03); }
+.stage::before { background: radial-gradient(closest-side, rgba(156,192,168,.3), transparent); height: 90%; }
+@media (min-width: 960px) and (min-aspect-ratio: 5/4) {
+  .hero-feats b { font-size: clamp(.6rem, 1.5svh, .74rem); }
+  .cat { --cH: min(104cqh, 150cqw); }
+}
+
+.stage { margin-top: clamp(8px, 1.8svh, 22px); }
+.cat { --cH: min(97cqh, 180cqw); }
+@media (min-width: 960px) and (min-aspect-ratio: 5/4) {
+  .hero { display: flex; flex-direction: column; justify-content: center; align-items: center; padding-right: 47%; position: relative; }
+  .hero > :not(.stage) { grid-column: auto; }
+  .hero .stage { position: absolute; right: 0; top: 0; bottom: 0; width: 49%; height: auto; margin: 0; grid-row: auto; grid-column: auto; }
+  .cat { --cH: min(100cqh, 150cqw); }
+}
+
+/* ===== destacados: experiencia y presupuesto ===== */
+.badge10 { display: inline-flex; align-items: baseline; gap: 8px; margin-top: clamp(8px, 1.6svh, 18px); padding: 7px 16px; border-radius: 999px; background: linear-gradient(135deg, #F6EFE6, #E9D7B8); color: #1B1209; font-weight: 600; font-size: clamp(.78rem, 3.3vw, 1rem); letter-spacing: -.01em; box-shadow: 0 8px 28px rgba(233,215,184,.25); }
+.badge10 b { font: 800 1.25em var(--font-display); letter-spacing: -.04em; }
+.xp-sec { padding-block: clamp(48px, 8vw, 96px) 0; }
+.xp-card { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: clamp(16px, 4vw, 44px); padding: clamp(24px, 5vw, 52px) clamp(22px, 5vw, 64px); border-radius: clamp(26px, 4vw, 40px); background: radial-gradient(120% 140% at 0% 0%, #1d4a38 0%, #0b1f17 60%, #06110c 100%); border: 1px solid rgba(156,192,170,.28); box-shadow: 0 30px 80px rgba(5,11,6,.28); color: var(--on-black); overflow: hidden; }
+.xp-num span { display: block; font: 800 clamp(4.6rem, 20vw, 10rem)/.85 var(--font-display); letter-spacing: -.06em; background: linear-gradient(180deg, #FBF1E4 0%, #E9D7B8 45%, #9CC0AA 100%); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .06em; }
+.xp-txt b { display: block; font: 800 clamp(1.5rem, 5.4vw, 3rem)/1.02 var(--font-display); letter-spacing: -.04em; color: #fff; }
+.xp-txt p { margin-top: 10px; color: var(--sage); font-size: clamp(1rem, 3.2vw, 1.35rem); font-weight: 500; max-width: 24ch; }
+.vband { margin-top: clamp(72px, 10vw, 130px); background: radial-gradient(90% 70% at 50% 0%, #11301f 0%, #07120d 70%); }
+.vband h2 { color: #fff; font-size: clamp(2.2rem, 7vw, 4.4rem); font-weight: 800; letter-spacing: -.05em; }
+.vband .eyebrow { color: var(--sage); }
+.vband .panel { background: linear-gradient(160deg, #173a2b 0%, #0b1b14 100%); border: 1px solid rgba(156,192,170,.32); box-shadow: 0 24px 60px rgba(0,0,0,.35); padding: clamp(24px, 5vw, 44px); }
+.vband .panel .eyebrow { color: var(--sage); font-weight: 700; }
+.vband .panel { container-type: inline-size; }
+.vband .price { display: grid; gap: .04em; font: 800 min(15.2cqw, 4.4rem)/1 var(--font-display); letter-spacing: -.05em; margin: 6px 0 10px; }
+.vband .price span { white-space: nowrap; background: linear-gradient(180deg, #FBF1E4, #E9D7B8); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: .06em; }
+.vband .price .to { font-size: .8em; opacity: .92; }
+.vband .panel p.pnote { color: var(--on-black-mute); }
+.vfoot { margin-top: 22px; text-align: center; color: var(--sage); font-weight: 600; letter-spacing: .02em; font-size: .95rem; }
+@media (max-width: 520px) { .xp-card { grid-template-columns: 1fr; text-align: left; gap: 6px; } .xp-num span { font-size: clamp(5rem, 30vw, 8rem); } }
+</style>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#inicio">Nuestros Gatitos</a>
+    <nav class="links" aria-label="Principal">
+      <a href="#videos">Videos</a><a href="#razas">Razas</a><a href="#valores">Valores</a><a href="#proceso">Cómo adquirir</a><a href="#salud">Salud</a><a href="#faq">Preguntas</a>
+    </nav>
+    <div class="nav-r">
+      <a class="btn btn-cream btn-sm" id="wa-nav" href="#" target="_blank" rel="noopener"><svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>WhatsApp</a>
+      <button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mnav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav" hidden aria-label="Menú">
+    <a href="#videos">Videos</a><a href="#razas">Razas</a><a href="#valores">Valores</a><a href="#proceso">Cómo adquirir</a><a href="#salud">Salud</a><a href="#faq">Preguntas</a>
+  </nav>
+</header>
+
+<div class="hero-band" id="inicio">
+  <div class="wrap hero">
+    <p class="eyebrow loc"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>Medellín, Antioquia · Restrepo, Meta</p>
+    <h1>Pequeños de patas cortas.</h1>
+    <p class="tagline">Grandes de corazón.</p>
+    <p class="pioneer">El primer criadero del mundo que trajo los gatos enanos a Latinoamérica.</p>
+    <p class="badge10"><b>+10</b> años de experiencia</p>
+    <div class="hero-cta">
+      <a class="btn btn-cream" href="#videos">Conoce nuestros gatitos <span aria-hidden="true">→</span></a>
+      <a class="btn btn-line" id="wa-hero" href="#" target="_blank" rel="noopener"><svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Hablar por WhatsApp</a>
+    </div>
+    <div class="hero-feats">
+      <div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="11" r="1.8"/><circle cx="9" cy="6.5" r="1.8"/><circle cx="15" cy="6.5" r="1.8"/><circle cx="19" cy="11" r="1.8"/><path d="M12 12c-3 0-5.5 3-5.5 5.2 0 1.6 1.4 2.3 2.8 2 .9-.2 1.7-.5 2.7-.5s1.8.3 2.7.5c1.4.3 2.8-.4 2.8-2C17.5 15 15 12 12 12z"/></svg><b>Razas enanas</b></div>
+      <div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg><b>Salud garantizada</b></div>
+      <div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg><b>Crianza responsable</b></div>
+      <div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><b>Entregas seguras</b></div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="word" id="word" aria-hidden="true">Gatitos</div>
+      <div class="cat" id="cat"><img src="img/gato-cut2.webp" alt="Gatito persa color durazno caminando hacia la cámara" width="796" height="1372"></div>
+    </div>
+  </div>
+
+  <div class="wrap reel-sec" id="videos">
+    <div class="reel-head">
+      <div class="sec-head">
+        <p class="eyebrow">En movimiento</p>
+        <h2>Míralos jugar.</h2>
+      </div>
+      <div class="arrows"><button class="arr" id="rprev" type="button" aria-label="Video anterior">←</button><button class="arr" id="rnext" type="button" aria-label="Video siguiente">→</button></div>
+    </div>
+    <div class="reel-track" id="reel" tabindex="0" aria-label="Videos de nuestros gatitos"></div>
+    <div class="more-h"><h3>Más videos</h3><span id="vcount"></span></div>
+    <div class="vgrid" id="vgrid"></div>
+  </div>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Video">
+  <button class="x" id="lb-x" type="button">Cerrar</button>
+  <button class="p" id="lb-p" type="button" aria-label="Anterior">←</button>
+  <video id="lb-v" playsinline controls loop hidden></video>
+  <img id="lb-i" alt="" hidden>
+  <button class="n" id="lb-n" type="button" aria-label="Siguiente">→</button>
+  <div class="lb-c" id="lb-c" aria-live="polite"></div>
+</div>
+
+<section class="wrap xp-sec">
+  <div class="xp-card">
+    <div class="xp-num"><span>+10</span></div>
+    <div class="xp-txt"><b>años de experiencia</b><p>Llevando amor a hogares en todo el mundo.</p></div>
+  </div>
+</section>
+
+<section id="exclusivas" class="wrap center" style="display:grid;gap:0;padding-block:112px 0">
+  <p class="eyebrow" style="margin-bottom:18px">Pioneros en Latinoamérica</p>
+  <h2 style="max-width:20ch">Razas exclusivas, de las más raras y exóticas.</h2>
+  <p class="lead" style="margin-top:20px;text-align:center">Fuimos el primer criadero del mundo en traer los gatos enanos a Latinoamérica. Con algunas de estas razas, somos los únicos en la región.</p>
+  <div class="xchips"><span>Kinkalow</span><span>Munchkin Fold</span><span>Bambino</span><span>Dwelf</span></div>
+</section>
+
+<section class="statement wrap center" style="display:grid;gap:0">
+  <p class="eyebrow" style="margin-bottom:18px">Seleccionados con amor</p>
+  <h2>Vacunados, desparasitados y esterilizados. Con acompañamiento de por vida.</h2>
+  <div class="facts" style="width:100%">
+    <div><b>Entrega a los 3 meses</b><span>Edad real de entrega</span></div>
+    <div><b>Esterilización</b><span>Con veterinario certificado en microcirugía</span></div>
+    <div><b>Documentos</b><span>Raza y reserva, con garantía</span></div>
+    <div><b>Colombia y exterior</b><span>Te guiamos en el trámite</span></div>
+  </div>
+</section>
+
+<div class="band" id="galeria">
+  <div class="wrap">
+    <div class="strip-bar">
+      <div class="sec-head" style="margin:0">
+        <p class="eyebrow">Galería</p>
+        <h2>Conócelos</h2>
+      </div>
+    </div>
+    <div class="gal-act" id="galact">
+      <button type="button" class="gbtn" id="gfull">Ver en tamaño completo</button>
+      <button type="button" class="gbtn ghost" id="gclose" hidden>Contraer</button>
+    </div>
+    <div class="gal" id="gal" data-mode="wall">
+      <div class="gal-grid" id="galgrid"></div>
+      <button class="gal-hint" id="galhint" type="button"><i aria-hidden="true">+</i><div><span>Toca para abrir la galería</span><b id="galcount"></b></div></button>
+    </div>
+    <div class="mason" id="mason" hidden></div>
+  </div>
+</div>
+
+<section id="razas" class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Razas</p>
+    <h2>Conoce las razas</h2>
+    <p class="lead">Una guía sencilla de los gatitos enanos que tenemos y de otras razas que también encontrarás aquí.</p>
+  </div>
+  <div class="breeds" id="breeds"></div>
+  <p class="others">También tenemos Persa, British, Scottish Fold, American Curl, Highland Fold y Sphynx. Pregunta por disponibilidad.</p>
+</section>
+
+<div class="band vband" id="valores"><div class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Presupuesto</p>
+    <h2>Un presupuesto claro desde el inicio.</h2>
+    <p class="lead">Valores de referencia en pesos colombianos. El valor final depende de la raza, el gatito y su línea genética, y te lo confirmamos por WhatsApp o llamada, sin costos ocultos.</p>
+  </div>
+  <div class="two">
+    <div class="panel">
+      <p class="eyebrow">Gatos enanos</p>
+      <p class="price"><span>$3.500.000</span><span class="to">– $6.500.000</span></p>
+      <p class="pnote">Pesos colombianos, según la raza. Munchkin, Minuet, Kinkalow, Munchkin Fold, Bambino y Dwelf.</p>
+    </div>
+    <div class="panel">
+      <p class="eyebrow">Patas largas</p>
+      <p class="price"><span>$1.500.000</span><span class="to">– $3.500.000</span></p>
+      <p class="pnote">Pesos colombianos, aproximado. Persa, British, Scottish Fold, American Curl, Highland Fold y Sphynx.</p>
+    </div>
+  </div>
+  <p class="vfoot">Sin costos ocultos · El valor final lo confirmamos por WhatsApp o llamada</p>
+</div></div>
+
+<section id="proceso" class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Cómo adquirir</p>
+    <h2>Cómo adquirir tu gatito</h2>
+    <p class="lead">Las ventas se cierran por llamada y WhatsApp. No pagas nada en esta página.</p>
+  </div>
+  <ol class="steps">
+    <li><div><b>Escríbenos o llámanos</b><span>Cuéntanos qué raza te gusta y dónde vives. Te contamos qué gatitos hay y su valor completo.</span></div></li>
+    <li><div><b>Elige a tu gatito</b><span>Conoce sus fotos, videos y datos. Resolvemos todas tus dudas por llamada o mensaje.</span></div></li>
+    <li><div><b>Reserva con documento</b><span>Al reservar recibes el documento que certifica la raza y la reserva, con la garantía del gatito.</span></div></li>
+    <li><div><b>Entrega a los 3 meses</b><span>Se entrega vacunado, desparasitado y esterilizado. Entrega en Colombia o envío al exterior.</span></div></li>
+    <li><div><b>Acompañamiento de por vida</b><span>Seguimos pendientes de tu gatito y tu familia por llamadas y mensajes, con veterinarios propios para orientarte.</span></div></li>
+  </ol>
+  <div class="inc">
+    <div><b>Vacunado y desparasitado</b><span>Incluido en la entrega.</span></div>
+    <div><b>Esterilizado</b><span>Con veterinario certificado en microcirugía.</span></div>
+    <div><b>Documento de raza y reserva</b><span>Con garantía de raza y garantía del gatito.</span></div>
+    <div><b>Acompañamiento</b><span>Siempre estamos pendientes, las 24 horas.</span></div>
+  </div>
+</section>
+
+<section id="envios" class="wrap">
+  <div class="two">
+    <div class="panel">
+      <p class="eyebrow">Sedes</p>
+      <h3>Medellín, Antioquia y Restrepo, Meta</h3>
+      <p>Tenemos dos sedes. Escríbenos y te indicamos en cuál está el gatito que te interesa y cómo coordinar la entrega.</p>
+    </div>
+    <div class="panel">
+      <p class="eyebrow">Envíos</p>
+      <h3>Colombia y exterior</h3>
+      <p>Hemos enviado a Estados Unidos, Ecuador, México y Chile. Para otros países te guiamos en los trámites.</p>
+      <p>Si vives en Europa, algunos clientes reciben en Colombia y hacen el trámite hacia allá. Te orientamos en ese proceso.</p>
+    </div>
+  </div>
+</section>
+
+<section id="salud" class="wrap">
+  <div class="sec-head">
+    <p class="eyebrow">Salud y cuidados</p>
+    <h2>Antes de decidir, infórmate</h2>
+    <p class="lead">Un gatito vive muchos años contigo. Queremos que elijas con toda la información.</p>
+  </div>
+  <div class="two">
+    <div class="panel">
+      <h3>Lo que incluye cada entrega</h3>
+      <ul>
+        <li>Vacunas y desparasitación al día.</li>
+        <li>Esterilización con veterinario certificado en microcirugía.</li>
+        <li>Documento de raza y reserva, con garantía.</li>
+        <li>Orientación veterinaria cuando la necesites.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Sobre las razas enanas</h3>
+      <p>Las razas enanas y las de orejas plegadas tienen cuidados particulares. Es información general: pregúntanos por cada gatito antes de reservar.</p>
+      <p>Pide siempre los datos de salud de tu gatito y consulta a tu veterinario de confianza.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="wrap">
+  <div class="sec-head"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que más nos preguntan</h2></div>
+  <details><summary>¿A qué edad se entregan?</summary><p>A los tres meses de edad aproximadamente.</p></details>
+  <details><summary>¿Cuánto cuesta un gatito?</summary><p>Como referencia: los gatos enanos van aproximadamente de $3.500.000 a $6.500.000 pesos colombianos, según la raza, y los de patas largas de $1.500.000 a $3.500.000. El valor final depende de la raza, el gatito y su línea genética; te lo damos completo desde el primer contacto por WhatsApp o llamada, sin costos ocultos.</p></details>
+  <details><summary>¿Qué documentos recibo?</summary><p>Un documento que certifica la raza y la reserva, con garantía de raza y garantía del gatito. Si tienes dudas sobre la garantía, te las resolvemos por WhatsApp.</p></details>
+  <details><summary>¿Hacen envíos al exterior?</summary><p>Sí. Hemos enviado a Estados Unidos, Ecuador, México y Chile, y te guiamos en los trámites de otros países.</p></details>
+  <details><summary>¿Qué pasa después de la entrega?</summary><p>Te acompañamos de por vida por llamadas y mensajes. Contamos con veterinarios propios que pueden orientarte según el caso.</p></details>
+  <details><summary>¿Cómo reservo?</summary><p>Por llamada o WhatsApp. Al reservar recibes el documento correspondiente.</p></details>
+</section>
+
+<div class="band" id="contacto">
+  <div class="wrap contact">
+    <p class="eyebrow">Contacto</p>
+    <h2>Hablemos de tu gatito.</h2>
+    <p>Escríbenos o llámanos. Te respondemos tus dudas y te contamos qué gatitos hay disponibles.</p>
+    <div class="num" id="phone-text">+57 350 271 5786</div>
+    <div class="row">
+      <a class="btn btn-cream" id="wa-contact" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <button class="btn btn-line" id="copy" type="button">Copiar número</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><b>Nuestros Gatitos</b> · Medellín, Antioquia y Restrepo, Meta · Colombia</div>
+    <div>Instagram: @nuestros_gaticos</div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="m-name">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+var PHONE = "573502715786";
+function wa(text) { return "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(text); }
+
+var BREEDS = [
+  { n: "Munchkin", t: "Patas cortas", d: "La raza enana más conocida: cuerpo de tamaño normal con patas cortas. Juguetón y sociable.",
+    f: [["Origen", "Estados Unidos, años 80"], ["Peso adulto", "2 a 4 kg"], ["Pelaje", "Corto o semilargo, muchos colores"], ["Carácter", "Juguetón, curioso y muy sociable"], ["Cuidados", "Cepillado semanal; se adapta muy bien a apartamentos"]],
+    e: "Corre, salta y juega como cualquier gato; sus patas cortas son un rasgo natural de la raza." },
+  { n: "Minuet", t: "También Napoleón", d: "Cruce de Munchkin y Persa. Cara redondeada, pelaje abundante y patas cortas.",
+    f: [["Origen", "Cruce de Munchkin y Persa"], ["Peso adulto", "2 a 4 kg"], ["Pelaje", "Denso y suave, corto o largo"], ["Carácter", "Tierno, tranquilo y muy apegado a su familia"], ["Cuidados", "Cepillado frecuente para mantener el pelaje"]],
+    e: "Una carita de peluche en un cuerpo compacto. Ideal para hogares tranquilos." },
+  { x: 1, n: "Kinkalow", t: "Orejas curvas", d: "Cruce de Munchkin y American Curl. Patas cortas y orejas que se curvan hacia atrás.",
+    f: [["Origen", "Cruce de Munchkin y American Curl"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Orejas curvadas hacia atrás y patas cortas"], ["Carácter", "Activo, cariñoso y muy sociable"], ["Cuidados", "Limpieza suave de orejas y cepillado semanal"]],
+    e: "Una de las razas más raras: combina dos rasgos poco comunes en un solo gatito." },
+  { x: 1, n: "Munchkin Fold", t: "Orejas plegadas", d: "Patas cortas con orejas plegadas hacia adelante. Cara dulce y redondeada.",
+    f: [["Origen", "Cruce de Munchkin y Scottish Fold"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Orejas plegadas hacia adelante y patas cortas"], ["Carácter", "Dulce, tranquilo y compañero"], ["Cuidados", "Cepillado semanal y revisión de orejas"]],
+    e: "Cara redonda, mirada tierna y un tamaño que enamora a primera vista." },
+  { x: 1, n: "Bambino", t: "Sin pelo", d: "Cruce de Sphynx y Munchkin. Patas cortas y piel casi sin pelo; necesita cuidado de la piel.",
+    f: [["Origen", "Cruce de Sphynx y Munchkin"], ["Peso adulto", "2 a 4 kg"], ["Piel", "Casi sin pelo, con arrugas y cálida al tacto"], ["Carácter", "Muy cariñoso, busca compañía y calor"], ["Cuidados", "Baños periódicos, protección del frío y del sol"]],
+    e: "Un gato muy pegado a su familia. Su piel pide un poco más de atención que la de otras razas." },
+  { x: 1, n: "Dwelf", t: "Sin pelo, orejas curvas", d: "Patas cortas, piel sin pelo y orejas curvas. Una raza poco común.",
+    f: [["Origen", "Cruce de Sphynx, Munchkin y American Curl"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Sin pelo, orejas curvas y patas cortas"], ["Carácter", "Cariñoso, juguetón y muy sociable"], ["Cuidados", "Baños periódicos, abrigo en climas fríos"]],
+    e: "Reúne tres rasgos poco comunes. Una de las razas más exóticas que existen." }
+];
+var OTHERS = ["Persa", "British", "Scottish Fold", "American Curl", "Highland Fold", "Sphynx"];
+/* Foto de ejemplo por raza: agrega img: "img/m/pNN.jpg" a cada raza con el número de la galería. */
+var DEFAULT_IMG = "img/gato-cut2.webp";
+
+
+/* menu movil */
+var mbtn = document.getElementById("menu-btn"), mnav = document.getElementById("mnav");
+function menuToggle(open) { mnav.hidden = !open; mbtn.setAttribute("aria-expanded", open ? "true" : "false"); mbtn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú"); }
+mbtn.addEventListener("click", function () { menuToggle(mnav.hidden); });
+mnav.addEventListener("click", function (e) { if (e.target.tagName === "A") menuToggle(false); });
+
+/* hero: soft scroll parallax */
+var cat = document.getElementById("cat"), word = document.getElementById("word"), ticking = false;
+if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+  window.addEventListener("scroll", function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = Math.min(window.scrollY, 700);
+      cat.style.translate = "0 " + (y * -0.03).toFixed(1) + "px";
+      word.style.translate = "0 " + (y * 0.05).toFixed(1) + "px";
+      ticking = false;
+    });
+  }, { passive: true });
+}
+
+/* video reel */
+var REEL = ["v1", "v6", "v11", "v12", "v2", "v8", "v15", "v16", "v22", "v20", "v14"];
+var MORE = ["v10", "v7", "v13", "v9", "v27", "v3", "v4", "v5", "v17", "v18", "v19", "v26", "v21", "v23", "v24", "v25"];
+var VIDEOS = REEL.concat(MORE);
+var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function card(v, i) {
+  return '<button class="reel" type="button" data-i="' + i + '" aria-label="Ver video ' + (i + 1) + ' con sonido"><video muted loop playsinline preload="none" poster="vid/' + v + '.jpg" data-src="vid/' + v + '.mp4"></video><span class="tag">▶ Ver con sonido</span></button>';
+}
+var reel = document.getElementById("reel"), vgrid = document.getElementById("vgrid");
+reel.innerHTML = REEL.map(function (v, i) { return card(v, i); }).join("");
+vgrid.innerHTML = MORE.map(function (v, i) { return card(v, REEL.length + i); }).join("");
+document.getElementById("vcount").textContent = VIDEOS.length + " videos en total";
+var cards = Array.prototype.slice.call(document.querySelectorAll(".reel"));
+var io = null;
+function watch() {
+  if (reduced || !("IntersectionObserver" in window)) return;
+  if (!io) io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var v = en.target.querySelector("video");
+      if (en.isIntersecting) {
+        if (!v.getAttribute("src")) v.setAttribute("src", v.getAttribute("data-src"));
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      } else { v.pause(); }
+    });
+  }, { threshold: 0.55 });
+  cards.forEach(function (c) { io.unobserve(c); io.observe(c); });
+}
+watch();
+function slideBy(dir) { reel.scrollBy({ left: dir * 386, behavior: "smooth" }); }
+document.getElementById("rprev").addEventListener("click", function () { slideBy(-1); });
+document.getElementById("rnext").addEventListener("click", function () { slideBy(1); });
+
+/* gallery */
+var PHOTOS = [
+  [1, 1400, 1400, "Gatito blanco y durazno de orejas curvas sobre un sofá azul"],
+  [14, 1400, 1750, "Gatito de tres colores mirando hacia arriba, de ojos verdes"],
+  [2, 1400, 1401, "Gatito negro con blanco y orejas curvas sobre una manta"],
+  [3, 1400, 1400, "Dos gatitos de ojos azules, uno gris y otro crema, sobre una manta roja"],
+  [4, 1400, 1400, "Tres gatitos de ojos azules sobre una manta roja"],
+  [19, 1400, 1400, "Gatito de tres colores sentado entre cojines grises"],
+  [5, 1400, 1750, "Gatito de pelo largo atigrado y blanco frente a una manta con estrellas"],
+  [20, 959, 959, "Gatito Scottish Fold crema de ojos azules"],
+  [6, 1400, 1400, "Primer plano de un gatito de ojos verdes y orejas curvas"],
+  [12, 1070, 1070, "Gatito blanco y atigrado junto a una figura dorada, con otro gatito blanco al fondo"],
+  [7, 1400, 1436, "Gatito blanco de ojos azules sobre una mano"],
+  [15, 1400, 1750, "Gatito atigrado recién nacido sobre una manta con estrellas"],
+  [16, 1400, 1750, "Gatito atigrado de ojos azules panza arriba"],
+  [8, 874, 874, "Gatito Scottish Fold blanco de ojos azules"],
+  [13, 720, 720, "Gatito negro con blanco sobre una alfombra rosada"],
+  [18, 812, 812, "Tres gatitos atigrados y blancos acostados juntos"],
+  [17, 899, 899, "Gatito atigrado de perfil sobre una alfombra blanca"],
+  [9, 874, 1296, "Gatito blanco durmiendo panza arriba"],
+  [10, 1079, 1061, "Gatito de tres colores mirando a la cámara"],
+  [11, 1080, 1080, "Gatito de pelo largo oliendo un vaso ámbar"],
+  [21, 990, 960, "Dos gatitos blancos descansando juntos sobre un sofá azul"],
+  [22, 640, 640, "Gatito Scottish Fold blanco de pie sobre sus patas traseras"],
+  [23, 1400, 1465, "Gatito de tres colores con collar rosado sobre un sofá azul"],
+  [24, 1400, 1399, "Gatito crema de orejas curvas sobre un sofá azul"],
+  [25, 1400, 1400, "Gatito crema de pelo largo y cola esponjosa"],
+  [26, 1400, 1400, "Gatito crema de orejas curvas frente a un cojín plateado"],
+  [27, 1400, 1400, "Gatito gris y blanco en brazos de su nueva familia"],
+  [28, 1400, 1400, "Gatito gris y blanco de pelo largo en brazos"],
+  [29, 1400, 1400, "Gatito gris y blanco sobre un sofá azul con vista a la ciudad"],
+  [30, 1400, 1400, "Gatito gris y blanco descansando frente a la ventana"],
+  [31, 1400, 1400, "Gatito gris y blanco de camino a su nuevo hogar"],
+  [32, 1400, 1400, "Gatito atigrado en brazos de un niño"],
+  [33, 1400, 1400, "Gatito atigrado junto a un niño"],
+  [34, 1400, 1400, "Niño con su gatito atigrado en un sofá azul"],
+  [35, 1400, 1400, "Gatito crema de pelo largo en brazos de su familia"],
+  [36, 1232, 1232, "Gatito atigrado de ojos verdes sobre una manta rosada"],
+  [37, 1400, 1478, "Gatito atigrado de pie sobre una alfombra blanca"],
+  [38, 1400, 1399, "Primer plano de un gatito atigrado de ojos claros"],
+  [39, 1400, 1400, "Gatito de tres colores mirando hacia arriba sobre césped"],
+  [40, 1400, 1400, "Gatito de tres colores maullando"],
+  [41, 1400, 1399, "Primer plano de un gatito de tres colores"],
+  [42, 1400, 1400, "Gatito de tres colores durmiendo en una manta blanca"],
+  [43, 1400, 1400, "Gatito de tres colores de ojos azules sentado"],
+  [44, 900, 900, "Gatito dorado descansando en los brazos de su familia"],
+  [45, 1400, 1400, "Gatito persa crema y blanco de mirada tierna"],
+  [46, 768, 768, "Gatito persa crema caminando"],
+  [47, 1400, 1400, "Gatito gris y blanco de pelo largo sobre césped"],
+  [48, 801, 801, "Dos gatitos blancos entre adornos navideños"],
+  [49, 1400, 1505, "Gatito de pelo largo y cola esponjosa de pie sobre una manta roja"],
+  [50, 1400, 1508, "Gatito atigrado y blanco de cola esponjosa mirando hacia arriba"],
+  [51, 1400, 1505, "Gatito atigrado y blanco sentado sobre una manta roja"],
+  [52, 1400, 1400, "Gatito atigrado y blanco de cola esponjosa mirando hacia arriba"]
+];
+var SHOWNUM = /[?&#]n(um)?\b/.test(location.search + location.hash);
+function numTag(i) { return SHOWNUM ? '<span class="num">' + (i + 1) + '</span>' : ""; }
+var gal = document.getElementById("gal"), galgrid = document.getElementById("galgrid"), mason = document.getElementById("mason");
+var gfull = document.getElementById("gfull"), gclose = document.getElementById("gclose");
+document.getElementById("galcount").textContent = PHOTOS.length + " fotos";
+galgrid.innerHTML = PHOTOS.map(function (p, i) {
+  return '<button type="button" data-i="' + i + '" aria-label="Ver foto ' + (i + 1) + ' en grande"><img src="img/t/p' + p[0] + '.jpg" width="200" height="200" alt="' + p[3] + '" loading="lazy">' + numTag(i) + '</button>';
+}).join("");
+var masonBuilt = false, mThumbs = false;
+function buildMason() {
+  if (masonBuilt) return; masonBuilt = true;
+  mason.innerHTML = PHOTOS.map(function (p, i) {
+    return '<button type="button" data-i="' + i + '" aria-label="Ver foto ' + (i + 1) + ' en grande"><img src="img/w/p' + p[0] + '.jpg" width="' + p[1] + '" height="' + p[2] + '" alt="' + p[3] + '" loading="lazy">' + numTag(i) + '</button>';
+  }).join("");
+}
+function upgradeThumbs() {
+  if (mThumbs) return; mThumbs = true;
+  Array.prototype.forEach.call(galgrid.querySelectorAll("img"), function (im, i) { im.src = "img/m/p" + PHOTOS[i][0] + ".jpg"; im.width = 420; im.height = 420; });
+}
+var noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function flip(change) {
+  var tiles = Array.prototype.slice.call(galgrid.children);
+  var h0 = gal.offsetHeight, f = tiles.map(function (t) { return t.getBoundingClientRect(); });
+  change();
+  var h1 = gal.offsetHeight;
+  if (noMotion || !galgrid.animate) return;
+  tiles.forEach(function (t, i) {
+    var l = t.getBoundingClientRect(), o = f[i];
+    var dx = o.left - l.left, dy = o.top - l.top, sx = o.width / l.width, sy = o.height / l.height;
+    t.animate([{ transformOrigin: "0 0", transform: "translate(" + dx + "px," + dy + "px) scale(" + sx + "," + sy + ")" }, { transformOrigin: "0 0", transform: "none" }],
+      { duration: 650, delay: Math.min(i * 14, 420), easing: "cubic-bezier(.2,.8,.2,1)", fill: "backwards" });
+  });
+  gal.style.overflow = "hidden";
+  var an = gal.animate([{ height: h0 + "px" }, { height: h1 + "px" }], { duration: 700, easing: "cubic-bezier(.2,.8,.2,1)" });
+  an.onfinish = an.oncancel = function () { gal.style.overflow = ""; };
+}
+function setMode(m) {
+  var cur = gal.getAttribute("data-mode");
+  if (m === cur && mason.hidden) return;
+  var fromFull = !mason.hidden;
+  if (m !== "wall") wallStop();
+  if (m === "full") {
+    buildMason(); gal.hidden = true; mason.hidden = false;
+    gfull.textContent = "Ver como miniaturas"; gclose.hidden = false;
+    document.getElementById("galeria").scrollIntoView({ behavior: noMotion ? "auto" : "smooth" });
+    return;
+  }
+  mason.hidden = true; gal.hidden = false;
+  gfull.textContent = "Ver en tamaño completo";
+  if (m === "grid") {
+    upgradeThumbs(); gclose.hidden = false;
+    if (fromFull) { gal.setAttribute("data-mode", "grid"); document.getElementById("galeria").scrollIntoView(); }
+    else flip(function () { gal.setAttribute("data-mode", "grid"); });
+  } else {
+    gclose.hidden = true;
+    flip(function () { gal.setAttribute("data-mode", "wall"); });
+    wallStart();
+    document.getElementById("galeria").scrollIntoView({ behavior: noMotion ? "auto" : "smooth" });
+  }
+}
+document.getElementById("galhint").addEventListener("click", function () { setMode("grid"); });
+gal.addEventListener("click", function (e) {
+  if (gal.getAttribute("data-mode") === "wall") { setMode("grid"); return; }
+  var b = e.target.closest ? e.target.closest("button[data-i]") : null;
+  if (b) openLb(PITEMS, +b.getAttribute("data-i"), b);
+});
+gfull.addEventListener("click", function () { setMode(mason.hidden ? "full" : "grid"); });
+gclose.addEventListener("click", function () { setMode("wall"); });
+
+/* pared interactiva: lupa que sigue al dedo / cursor y deriva sola */
+var wallOn = false, wallRaf = 0, wallInView = false, wallUser = false, wallIdle = 0, wpx = -999, wpy = -999, wallT = 0;
+var wallTiles = Array.prototype.slice.call(galgrid.children);
+function wallDraw(px, py) {
+  var tw = wallTiles[0].offsetWidth, sig = tw * 1.45, amp = 1.15;
+  for (var i = 0; i < wallTiles.length; i++) {
+    var t = wallTiles[i];
+    var cx = t.offsetLeft + t.offsetWidth / 2, cy = t.offsetTop + t.offsetHeight / 2;
+    var dx = cx - px, dy = cy - py, k = Math.exp(-(dx * dx + dy * dy) / (2 * sig * sig));
+    t.style.transform = k > .01 ? "scale(" + (1 + amp * k).toFixed(3) + ")" : "";
+    t.style.zIndex = k > .04 ? Math.round(k * 100) : "";
+    t.style.filter = "brightness(" + (.7 + .3 * Math.min(1, k * 1.6)).toFixed(2) + ") saturate(" + (.85 + .15 * Math.min(1, k * 1.6)).toFixed(2) + ")";
+    t.style.boxShadow = k > .35 ? "0 " + Math.round(14 * k) + "px " + Math.round(34 * k) + "px rgba(0,0,0," + (.5 * k).toFixed(2) + ")" : "";
+  }
+}
+function wallClear() { wallTiles.forEach(function (t) { t.style.transform = t.style.zIndex = t.style.filter = t.style.boxShadow = ""; }); }
+function wallLoop(ts) {
+  wallRaf = 0;
+  if (!wallOn || !wallInView) return;
+  if (!wallUser) {
+    wallT = ts / 1000;
+    var w = galgrid.offsetWidth, h = galgrid.offsetHeight;
+    wallDraw(w * (.5 + .38 * Math.sin(wallT * .55)), h * (.5 + .34 * Math.sin(wallT * .41 + 1.3)));
+  } else wallDraw(wpx, wpy);
+  wallRaf = requestAnimationFrame(wallLoop);
+}
+function wallStart() { return; wallOn = true; if (!wallRaf && wallInView) wallRaf = requestAnimationFrame(wallLoop); }
+function wallStop() { wallOn = false; cancelAnimationFrame(wallRaf); wallRaf = 0; wallClear(); }
+function wallPoint(e) {
+  var r = galgrid.getBoundingClientRect();
+  wpx = e.clientX - r.left; wpy = e.clientY - r.top; wallUser = true; clearTimeout(wallIdle);
+}
+function wallRelease() { clearTimeout(wallIdle); wallIdle = setTimeout(function () { wallUser = false; }, 1400); }
+gal.addEventListener("pointerdown", function (e) { if (wallOn) wallPoint(e); });
+gal.addEventListener("pointermove", function (e) { if (wallOn && (e.pointerType !== "mouse" || true)) wallPoint(e); });
+gal.addEventListener("pointerleave", function () { if (wallOn) wallRelease(); });
+gal.addEventListener("pointerup", function () { if (wallOn) wallRelease(); });
+gal.addEventListener("pointercancel", function () { if (wallOn) wallRelease(); });
+if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { wallInView = en[0].isIntersecting; if (wallInView && wallOn && !wallRaf) wallRaf = requestAnimationFrame(wallLoop); }, { threshold: 0 }).observe(gal);
+else wallInView = true;
+wallStart();
+
+
+/* lightbox (videos y fotos) */
+var lb = document.getElementById("lb"), lbv = document.getElementById("lb-v"), lbi = document.getElementById("lb-i"), lbc = document.getElementById("lb-c");
+var list = [], li = 0;
+function stopVideo() { lbv.pause(); lbv.removeAttribute("src"); lbv.load(); }
+var origin = null, lbBusy = false, fullTimer = 0;
+function fitPhoto(m) {
+  var mw = Math.min(innerWidth - 32, 1100), mh = innerHeight - (innerWidth < 700 ? 210 : 150);
+  var k = Math.min(mw / m.w, mh / m.h);
+  lbi.style.width = Math.round(m.w * k) + "px"; lbi.style.height = Math.round(m.h * k) + "px";
+}
+function showItem(i, dir) {
+  li = (i + list.length) % list.length;
+  var m = list[li];
+  if (m.t === "v") {
+    lbi.hidden = true; lbv.hidden = false; lbv.muted = false;
+    lbv.setAttribute("poster", "vid/" + m.id + ".jpg");
+    lbv.setAttribute("src", "vid/" + m.id + ".mp4");
+    var p = lbv.play(); if (p && p.catch) p.catch(function () {});
+  } else {
+    stopVideo(); lbv.hidden = true; lbi.hidden = false;
+    fitPhoto(m);
+    lbi.setAttribute("alt", m.alt);
+    lbi.setAttribute("src", "img/w/p" + m.id + ".jpg");
+    clearTimeout(fullTimer);
+    var full = new Image(), want = li;
+    full.onload = function () { if (li === want && !lb.hidden) lbi.setAttribute("src", full.src); };
+    full.src = "img/p" + m.id + ".jpg";
+  }
+  lbc.textContent = (li + 1) + " / " + list.length;
+  if (dir && !noMotion) {
+    var el = m.t === "v" ? lbv : lbi;
+    el.animate([{ opacity: 0, transform: "translateX(" + (dir * 36) + "px) scale(.97)" }, { opacity: 1, transform: "none" }], { duration: 320, easing: "cubic-bezier(.2,.8,.2,1)" });
+  }
+}
+function originEl() {
+  var q = list === PITEMS ? (mason.hidden ? galgrid : mason).querySelector('[data-i="' + li + '"]') : document.querySelector('.reel[data-i="' + li + '"]');
+  return q && q.offsetParent ? q : null;
+}
+function rectFlip(el, r) {
+  var m = el.getBoundingClientRect();
+  var dx = r.left + r.width / 2 - (m.left + m.width / 2), dy = r.top + r.height / 2 - (m.top + m.height / 2);
+  return "translate(" + dx + "px," + dy + "px) scale(" + Math.max(r.width / m.width, r.height / m.height) + ")";
+}
+function openLb(items, i, from) {
+  cards.forEach(function (c) { c.querySelector("video").pause(); });
+  list = items; lb.hidden = false; showItem(i);
+  document.body.style.overflow = "hidden";
+  document.getElementById("lb-x").focus({ preventScroll: true });
+  if (noMotion) return;
+  lb.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 280, easing: "ease-out" });
+  var el = list[li].t === "v" ? lbv : lbi, r = from && from.getBoundingClientRect();
+  var start = r && list[li].t === "p" ? rectFlip(el, r) + "" : "scale(.9)";
+  el.animate([{ transform: start, opacity: r ? .6 : 0, borderRadius: "16px" }, { transform: "none", opacity: 1, borderRadius: "28px" }], { duration: 520, easing: "cubic-bezier(.2,.85,.25,1)" });
+}
+function closeLb() {
+  if (lbBusy || lb.hidden) return;
+  var done = function () {
+    stopVideo(); lbi.removeAttribute("src"); lb.hidden = true; lbBusy = false;
+    document.body.style.overflow = ""; watch();
+  };
+  if (noMotion) { done(); return; }
+  lbBusy = true;
+  var el = list[li].t === "v" ? lbv : lbi, o = originEl(), r = o && o.getBoundingClientRect();
+  var vis = r && r.bottom > 0 && r.top < innerHeight;
+  lb.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, easing: "ease-in", fill: "forwards" });
+  var an = el.animate([{ transform: "none", opacity: 1 }, { transform: vis && list[li].t === "p" ? rectFlip(el, r) : "scale(.92)", opacity: 0 }], { duration: 340, easing: "cubic-bezier(.4,0,.8,.4)", fill: "forwards" });
+  an.onfinish = function () { done(); lb.getAnimations().forEach(function (x) { x.cancel(); }); el.getAnimations().forEach(function (x) { x.cancel(); }); };
+}
+var VITEMS = VIDEOS.map(function (v) { return { t: "v", id: v }; });
+var PITEMS = PHOTOS.map(function (p) { return { t: "p", id: p[0], w: p[1], h: p[2], alt: p[3] }; });
+cards.forEach(function (c) { c.addEventListener("click", function () { openLb(VITEMS, +c.getAttribute("data-i"), c); }); });
+mason.addEventListener("click", function (e) {
+  var b = e.target.closest ? e.target.closest("button") : null;
+  if (b) openLb(PITEMS, +b.getAttribute("data-i"), b);
+});
+var tx = 0, ty = 0, tt = 0;
+lb.addEventListener("touchstart", function (e) { if (e.touches.length === 1) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; tt = Date.now(); } }, { passive: true });
+lb.addEventListener("touchend", function (e) {
+  if (!e.changedTouches.length || Date.now() - tt > 700) return;
+  var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) showItem(li + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+  else if (dy > 90 && Math.abs(dy) > Math.abs(dx) * 1.4) closeLb();
+}, { passive: true });
+document.getElementById("lb-x").addEventListener("click", closeLb);
+document.getElementById("lb-p").addEventListener("click", function () { showItem(li - 1, -1); });
+document.getElementById("lb-n").addEventListener("click", function () { showItem(li + 1, 1); });
+lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
+document.addEventListener("keydown", function (e) {
+  if (lb.hidden) return;
+  if (e.key === "Escape") closeLb();
+  if (e.key === "ArrowLeft") showItem(li - 1, -1);
+  if (e.key === "ArrowRight") showItem(li + 1, 1);
+});
+
+/* breeds */
+var bEl = document.getElementById("breeds");
+bEl.innerHTML = BREEDS.map(function (b) {
+  return '<article class="breed">' + (b.x ? '<span class="xtag">Raza exclusiva</span>' : '') + '<span class="tag">' + b.t + '</span><h3>' + b.n + '</h3><p>' + b.d + '</p><button type="button" data-raza="' + b.n + '">Ver detalles de ' + b.n + '</button></article>';
+}).join("");
+var modal = document.getElementById("modal"), lastBtn = null;
+bEl.addEventListener("click", function (e) {
+  var btn = e.target.closest ? e.target.closest("button[data-raza]") : null;
+  if (!btn) return;
+  lastBtn = btn;
+  openBreed(btn.getAttribute("data-raza"));
+});
+function openBreed(name) {
+  var b = BREEDS.filter(function (x) { return x.n === name; })[0];
+  if (!b) return;
+  var msg = "Hola, me interesa la raza " + b.n + ". ¿Qué gatitos tienen y cuál es el valor?";
+  document.getElementById("sheet").innerHTML =
+    '<div class="ph bph"><img src="' + (b.img || DEFAULT_IMG) + '" alt="Gatito ' + b.n + '">' + (b.x ? '<b class="pill">Raza exclusiva</b>' : '') + '</div>' +
+    '<div class="sheet-b"><button class="close" type="button" id="close">Cerrar</button><h2 id="m-name" style="font-size:2rem">' + b.n + '</h2>' +
+    '<p style="color:var(--muted)">' + b.e + '</p>' +
+    '<dl>' + b.f.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join("") + '</dl>' +
+    '<p class="price-note">El valor depende de la raza, el gatito y su línea genética. Te lo confirmamos por WhatsApp o llamada, sin costos ocultos.</p>' +
+    '<a class="btn btn-primary" href="' + wa(msg) + '" target="_blank" rel="noopener">Preguntar por ' + b.n + '</a></div>';
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+  document.getElementById("close").focus();
+}
+function closeBreed() { modal.hidden = true; document.body.style.overflow = ""; if (lastBtn) lastBtn.focus(); }
+modal.addEventListener("click", function (e) { if (e.target === modal || e.target.id === "close") closeBreed(); });
+document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !modal.hidden) closeBreed(); });
+
+/* contact */
+var hello = "Hola, vi su página y quiero información sobre sus gatitos.";
+["wa-nav", "wa-hero", "wa-contact"].forEach(function (id) { document.getElementById(id).setAttribute("href", wa(hello)); });
+document.getElementById("copy").addEventListener("click", function () {
+  var b = this, ok = function () { b.textContent = "Número copiado"; };
+  try { navigator.clipboard.writeText("+57 350 271 5786").then(ok, function () { b.textContent = "Copia el número de arriba"; }); }
+  catch (err) { b.textContent = "Copia el número de arriba"; }
+});
+
+</script>
