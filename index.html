@@ -461,6 +461,8 @@ h2, h3 { font-weight: 700; }
 .stage::after { display: none; }
 .cat { --cH: min(calc(97cqh - var(--fs) * .42), 170cqw); bottom: calc(var(--fs) * .42 + 2.5cqh); }
 @media (min-width: 960px) and (min-aspect-ratio: 5/4) { .cat { --cH: min(calc(97cqh - var(--fs) * .42), 150cqw); } }
+.stage { z-index: 2; }
+.cat { will-change: scale, translate; }
 </style>
 
 <header class="nav">
@@ -743,19 +745,25 @@ function menuToggle(open) { mnav.hidden = !open; mbtn.setAttribute("aria-expande
 mbtn.addEventListener("click", function () { menuToggle(mnav.hidden); });
 mnav.addEventListener("click", function (e) { if (e.target.tagName === "A") menuToggle(false); });
 
-/* hero: soft scroll parallax */
+/* hero: al bajar, el gatito crece y se vuelve el protagonista */
 var cat = document.getElementById("cat"), word = document.getElementById("word"), ticking = false;
-if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
-  window.addEventListener("scroll", function () {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(function () {
-      var y = Math.min(window.scrollY, 700);
-      cat.style.translate = "0 " + (y * -0.03).toFixed(1) + "px";
-      word.style.translate = "0 " + (y * -0.02).toFixed(1) + "px";
-      ticking = false;
-    });
-  }, { passive: true });
+var heroEl = document.querySelector(".hero"), heroTexts = heroEl ? Array.prototype.filter.call(heroEl.children, function (n) { return !n.classList.contains("stage"); }) : [];
+if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches && heroEl) {
+  var heroUpdate = function () {
+    var wide = window.matchMedia("(min-width: 960px) and (min-aspect-ratio: 5/4)").matches;
+    var span = Math.max(heroEl.offsetHeight * 0.85, 360);
+    var p = Math.min(Math.max(window.scrollY / span, 0), 1);
+    var e = p * (2 - p);
+    cat.style.scale = (1 + (wide ? 0.38 : 0.62) * e).toFixed(3);
+    cat.style.translate = "0 " + (-window.scrollY * 0.02).toFixed(1) + "px";
+    cat.style.transformOrigin = "50% 100%";
+    word.style.translate = "0 " + (window.scrollY * -0.02).toFixed(1) + "px";
+    var o = wide ? 1 : Math.max(1 - e * 0.9, 0.1);
+    heroTexts.forEach(function (n) { n.style.opacity = o.toFixed(2); });
+    ticking = false;
+  };
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(heroUpdate); } }, { passive: true });
+  window.addEventListener("resize", heroUpdate);
 }
 
 /* video reel */
