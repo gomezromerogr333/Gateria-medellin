@@ -501,6 +501,11 @@ h2, h3 { font-weight: 700; }
 .vwall:has(.vgrid:not(.compact)) .vhint { display: none; }
 .vwall:has(.vgrid:not(.compact))::before { display: none; }
 .vhint { width: max-content; max-width: calc(100vw - 40px); white-space: nowrap; }
+
+/* galería: botones que acompañan al cliente mientras recorre las fotos */
+.gal-act { position: sticky; top: calc(var(--nav, 64px) + 10px); z-index: 25; width: max-content; max-width: 100%; margin-inline: auto 0; justify-content: flex-start; }
+.gal-act .gbtn { box-shadow: 0 8px 26px rgba(0,0,0,.4); }
+.gal-act .gbtn.ghost { background: rgba(8,16,12,.78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: rgba(255,255,255,.3); }
 </style>
 
 <header class="nav">
@@ -993,36 +998,30 @@ function flip(change) {
   an.onfinish = an.oncancel = function () { gal.style.overflow = ""; };
 }
 function setMode(m) {
-  var cur = gal.getAttribute("data-mode");
-  if (m === cur && mason.hidden) return;
-  var fromFull = !mason.hidden;
-  if (m !== "wall") wallStop();
+  /* solo dos estados: contraido (muro) y tamaño completo */
+  if (m === "grid") m = "full";
+  var full = !mason.hidden;
   if (m === "full") {
-    buildMason(); gal.hidden = true; mason.hidden = false;
-    gfull.textContent = "Ver como miniaturas"; gclose.hidden = false;
+    if (full) return;
+    wallStop(); buildMason(); gal.hidden = true; mason.hidden = false;
+    gfull.hidden = true; gclose.hidden = false;
     document.getElementById("galeria").scrollIntoView({ behavior: noMotion ? "auto" : "smooth" });
     return;
   }
+  /* contraer */
   mason.hidden = true; gal.hidden = false;
-  gfull.textContent = "Ver en tamaño completo";
-  if (m === "grid") {
-    upgradeThumbs(); gclose.hidden = false;
-    if (fromFull) { gal.setAttribute("data-mode", "grid"); document.getElementById("galeria").scrollIntoView(); }
-    else flip(function () { gal.setAttribute("data-mode", "grid"); });
-  } else {
-    gclose.hidden = true;
-    flip(function () { gal.setAttribute("data-mode", "wall"); });
-    wallStart();
-    document.getElementById("galeria").scrollIntoView({ behavior: noMotion ? "auto" : "smooth" });
-  }
+  gfull.hidden = false; gfull.textContent = "Ver en tamaño completo"; gclose.hidden = true;
+  gal.setAttribute("data-mode", "wall");
+  wallStart();
+  document.getElementById("galeria").scrollIntoView({ behavior: noMotion ? "auto" : "smooth" });
 }
 document.getElementById("galhint").addEventListener("click", function () { setMode("grid"); });
 gal.addEventListener("click", function (e) {
-  if (gal.getAttribute("data-mode") === "wall") { setMode("grid"); return; }
+  if (gal.getAttribute("data-mode") === "wall") { setMode("full"); return; }
   var b = e.target.closest ? e.target.closest("button[data-i]") : null;
   if (b) openLb(PITEMS, +b.getAttribute("data-i"), b);
 });
-gfull.addEventListener("click", function () { setMode(mason.hidden ? "full" : "grid"); });
+gfull.addEventListener("click", function () { setMode("full"); });
 gclose.addEventListener("click", function () { setMode("wall"); });
 
 /* pared interactiva: lupa que sigue al dedo / cursor y deriva sola */
