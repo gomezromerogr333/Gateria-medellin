@@ -209,6 +209,10 @@ section { padding-block: 112px 0; scroll-margin-top: 56px; }
 .breed h3 { font-size: 1.7rem; letter-spacing: -.03em; }
 .breed p { color: var(--muted); font-size: .98rem; }
 .breed button { justify-self: start; margin-top: 8px; background: none; border: 0; padding: 0; color: var(--ink); font: 500 .98rem var(--font); text-decoration: underline; text-underline-offset: 5px; cursor: pointer; }
+.visit { margin-top: 24px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 28px; padding: clamp(22px, 4vw, 34px); display: flex; gap: 20px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.visit h3 { margin: 0 0 6px; font: 600 clamp(1.25rem, 4.4vw, 1.6rem)/1.15 var(--font); letter-spacing: -.02em; }
+.visit p { margin: 0; color: var(--muted); max-width: 52ch; line-height: 1.5; }
+@media (max-width: 560px) { .visit .btn { width: 100%; } }
 .others-box { margin-top: 28px; background: var(--black); color: var(--on-black); border-radius: 28px; padding: clamp(28px, 5vw, 48px); display: grid; gap: 14px; justify-items: center; text-align: center; }
 .others-box .eyebrow { color: var(--warm); margin: 0; }
 .others-box h3 { margin: 0; font: 600 clamp(1.5rem, 5.2vw, 2.4rem)/1.1 var(--font); letter-spacing: -.03em; }
@@ -688,7 +692,7 @@ h2, h3 { font-weight: 700; }
   <div class="sec-head">
     <p class="eyebrow">Cómo adquirir</p>
     <h2>Cómo adquirir tu gatito</h2>
-    <p class="lead">Las ventas se cierran por llamada y WhatsApp. No pagas nada en esta página.</p>
+    <p class="lead">Las ventas se cierran por llamada y WhatsApp, y también en persona: puedes visitar nuestra gatería, conocer a los gatitos y cerrar la compra ahí mismo. No pagas nada en esta página.</p>
   </div>
   <ol class="steps">
     <li><div><b>Escríbenos o llámanos</b><span>Cuéntanos qué raza te gusta y dónde vives. Te contamos qué gatitos hay y su valor completo.</span></div></li>
@@ -697,6 +701,10 @@ h2, h3 { font-weight: 700; }
     <li><div><b>Entrega a los 3 meses</b><span>Se entrega vacunado, desparasitado y esterilizado. Entrega en Colombia o envío al exterior.</span></div></li>
     <li><div><b>Acompañamiento de por vida</b><span>Seguimos pendientes de tu gatito y tu familia por llamadas y mensajes, con veterinarios propios para orientarte.</span></div></li>
   </ol>
+  <div class="visit">
+    <div><h3>¿Prefieres verlo en persona?</h3><p>Visítanos, conoce a los gatitos y a quienes los criamos. Si te gusta uno, puedes cerrar la compra ahí mismo, con toda la tranquilidad.</p></div>
+    <a class="btn btn-primary" id="wa-visit" href="#" target="_blank" rel="noopener">Quiero visitarlos</a>
+  </div>
   <div class="inc">
     <div><b>Vacunado y desparasitado</b><span>Incluido en la entrega.</span></div>
     <div><b>Esterilizado</b><span>Con veterinario certificado en microcirugía.</span></div>
@@ -752,7 +760,8 @@ h2, h3 { font-weight: 700; }
   <details><summary>¿Qué documentos recibo?</summary><p>Un documento que certifica la raza y la reserva, con garantía de raza y garantía del gatito. Si tienes dudas sobre la garantía, te las resolvemos por WhatsApp.</p></details>
   <details><summary>¿Hacen envíos al exterior?</summary><p>Sí. Hemos enviado a Estados Unidos, Ecuador, México y Chile, y te guiamos en los trámites de otros países.</p></details>
   <details><summary>¿Qué pasa después de la entrega?</summary><p>Te acompañamos de por vida por llamadas y mensajes. Contamos con veterinarios propios que pueden orientarte según el caso.</p></details>
-  <details><summary>¿Cómo reservo?</summary><p>Por llamada o WhatsApp. Al reservar recibes el documento correspondiente.</p></details>
+  <details><summary>¿Cómo reservo?</summary><p>Por llamada o WhatsApp, o presencialmente si nos visitas. Al reservar recibes el documento correspondiente.</p></details>
+  <details><summary>¿Puedo visitar la gatería?</summary><p>Claro. Puedes venir a conocer a los gatitos y a nosotros, y si te gusta, cerrar la compra en persona. Estamos en Medellín (Antioquia) y Restrepo (Meta). Escríbenos por WhatsApp o llámanos y coordinamos tu visita.</p></details>
 </section>
 
 <div class="band" id="contacto">
@@ -1239,6 +1248,7 @@ document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !m
 /* contact */
 var hello = "Hola, vi su página y quiero información sobre sus gatitos.";
 ["wa-nav", "wa-hero", "wa-contact"].forEach(function (id) { document.getElementById(id).setAttribute("href", wa(hello)); });
+document.getElementById("wa-visit").setAttribute("href", wa("Hola, me gustaría visitar la gatería para conocer a los gatitos. ¿Cómo coordinamos?"));
 document.getElementById("wa-others").setAttribute("href", wa("Hola, vi su página y quiero saber qué razas de patas largas tienen disponibles (Persa, British, Scottish Fold, American Curl, Highland Fold o Sphynx)."));
 document.getElementById("copy").addEventListener("click", function () {
   var b = this, ok = function () { b.textContent = "Número copiado"; };
