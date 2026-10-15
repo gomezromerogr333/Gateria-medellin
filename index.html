@@ -118,6 +118,9 @@ section { padding-block: 112px 0; scroll-margin-top: 56px; }
 .reel-track::-webkit-scrollbar { display: none; }
 .reel { position: relative; flex: 0 0 min(370px, 80%); aspect-ratio: 9 / 16; border-radius: 32px; overflow: hidden; background: var(--black-2); scroll-snap-align: start; border: 0; padding: 0; cursor: pointer; color: #fff; font: inherit; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
 .reel:hover { transform: scale(1.015); }
+.reel { background-size: cover; background-position: center; background-repeat: no-repeat; }
+.reel video { opacity: 0; transition: opacity .3s ease; background: transparent; }
+.reel video.on { opacity: 1; }
 .reel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .reel::after { content: ""; position: absolute; inset: auto 0 0 0; height: 32%; background: linear-gradient(to top, rgba(0,0,0,.6), transparent); pointer-events: none; }
 .reel .tag { position: absolute; left: 16px; bottom: 16px; z-index: 1; display: inline-flex; gap: 8px; align-items: center; background: rgba(0,0,0,.42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: 8px 14px; font-size: .84rem; font-weight: 500; }
@@ -806,7 +809,7 @@ var MORE = ["v10", "v7", "v13", "v9", "v27", "v3", "v4", "v5", "v17", "v18", "v1
 var VIDEOS = REEL.concat(MORE);
 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function card(v, i) {
-  return '<button class="reel" type="button" data-i="' + i + '" aria-label="Ver video ' + (i + 1) + ' con sonido"><video muted loop playsinline preload="none" poster="vid/' + v + '.jpg" data-src="vid/' + v + '.mp4"></video><span class="tag">▶ Ver con sonido</span></button>';
+  return '<button class="reel" type="button" data-i="' + i + '" style="background-image:url(vid/' + v + '.jpg)" aria-label="Ver video ' + (i + 1) + ' con sonido"><video muted loop playsinline preload="none" poster="vid/' + v + '.jpg" data-src="vid/' + v + '.mp4"></video><span class="tag">▶ Ver con sonido</span></button>';
 }
 var reel = document.getElementById("reel"), vgrid = document.getElementById("vgrid");
 reel.innerHTML = REEL.map(function (v, i) { return card(v, i); }).join("");
@@ -815,17 +818,37 @@ document.getElementById("vcount").textContent = VIDEOS.length + " videos en tota
 var cards = Array.prototype.slice.call(document.querySelectorAll(".reel"));
 var io = null;
 function watch() {
-  if (reduced || !("IntersectionObserver" in window)) return;
-  if (!io) io = new IntersectionObserver(function (entries) {
+  if (!("IntersectionObserver" in window)) return;
+  /* 1) carga con anticipacion: el video ya esta listo cuando entra a la pantalla */
+  var loader = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var v = en.target.querySelector("video");
+      if (!v.getAttribute("src")) { v.setAttribute("preload", "auto"); v.setAttribute("src", v.getAttribute("data-src")); }
+      loader.unobserve(en.target);
+    });
+  }, { rootMargin: "700px 900px" });
+  cards.forEach(function (c) {
+    var v = c.querySelector("video");
+    v.addEventListener("playing", function () { v.classList.add("on"); });
+    loader.observe(c);
+  });
+  if (reduced) return;
+  /* 2) reproduce solo los visibles; al salir, vuelve a verse la portada (nunca negro) */
+  io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
       var v = en.target.querySelector("video");
       if (en.isIntersecting) {
-        if (!v.getAttribute("src")) v.setAttribute("src", v.getAttribute("data-src"));
+        if (!v.getAttribute("src")) { v.setAttribute("src", v.getAttribute("data-src")); }
         var p = v.play(); if (p && p.catch) p.catch(function () {});
-      } else { v.pause(); }
+        [en.target.previousElementSibling, en.target.nextElementSibling, en.target.nextElementSibling && en.target.nextElementSibling.nextElementSibling].forEach(function (n) {
+          var nv = n && n.querySelector && n.querySelector("video");
+          if (nv && !nv.getAttribute("src")) { nv.setAttribute("preload", "auto"); nv.setAttribute("src", nv.getAttribute("data-src")); }
+        });
+      } else { v.pause(); v.classList.remove("on"); }
     });
-  }, { threshold: 0.55 });
-  cards.forEach(function (c) { io.unobserve(c); io.observe(c); });
+  }, { threshold: 0.45 });
+  cards.forEach(function (c) { io.observe(c); });
 }
 watch();
 function slideBy(dir) { reel.scrollBy({ left: dir * 386, behavior: "smooth" }); }
