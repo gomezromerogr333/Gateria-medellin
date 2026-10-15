@@ -16,6 +16,7 @@
 <meta name="twitter:image" content="https://gateria-medellin.vercel.app/img/og.jpg">
 <link rel="icon" type="image/jpeg" href="img/og.jpg">
 
+<link rel="preload" as="image" href="img/gato-cut2.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap">
@@ -557,7 +558,7 @@ h2, h3 { font-weight: 700; }
     </div>
     <div class="stage" id="stage">
       <div class="word" id="word" aria-hidden="true">Gatitos</div>
-      <div class="cat" id="cat"><img src="img/gato-cut2.webp" alt="Gatito persa color durazno caminando hacia la cámara" width="796" height="1372"></div>
+      <div class="cat" id="cat"><img src="img/gato-cut2.webp" alt="Gatito persa color durazno caminando hacia la cámara" width="796" height="1372" fetchpriority="high" decoding="async"></div>
     </div>
   </div>
 
@@ -846,48 +847,44 @@ var MORE = ["v10", "v7", "v13", "v9", "v27", "v3", "v4", "v5", "v17", "v18", "v1
 var VIDEOS = REEL.concat(MORE);
 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function card(v, i) {
-  return '<button class="reel" type="button" data-i="' + i + '" style="background-image:url(vid/' + v + '.jpg)" aria-label="Ver video ' + (i + 1) + ' con sonido"><video muted loop playsinline preload="none" poster="vid/' + v + '.jpg" data-src="vid/' + v + '.mp4"></video><span class="tag">▶<span>&nbsp;Ver con sonido</span></span></button>';
+  return '<button class="reel" type="button" data-i="' + i + '" style="background-image:url(vid/' + v + '.jpg)" aria-label="Ver video ' + (i + 1) + ' con sonido"><video muted loop playsinline preload="none" poster="vid/' + v + '.jpg" data-src="vid/' + v + '.mp4" data-prev="vid/' + v + '-p.mp4"></video><span class="tag">▶<span>&nbsp;Ver con sonido</span></span></button>';
 }
 var reel = document.getElementById("reel"), vgrid = document.getElementById("vgrid");
 reel.innerHTML = REEL.map(function (v, i) { return card(v, i); }).join("");
 vgrid.innerHTML = MORE.map(function (v, i) { return card(v, REEL.length + i); }).join("");
 document.getElementById("vcount").textContent = VIDEOS.length + " videos en total";
 var cards = Array.prototype.slice.call(document.querySelectorAll(".reel"));
-var io = null, loader = null;
+var io = null;
+function srcFor(c, v) {
+  /* en el muro compacto se usan clips livianos; en tamaño normal, el video completo */
+  return (vgrid.contains(c) && vgrid.classList.contains("compact")) ? v.getAttribute("data-prev") : v.getAttribute("data-src");
+}
+function setSrc(c) {
+  var v = c.querySelector("video"), want = srcFor(c, v);
+  if (v.getAttribute("src") !== want) { v.setAttribute("src", want); }
+}
 function watch() {
   if (!("IntersectionObserver" in window)) return;
-  /* 1) carga con anticipacion: el video ya esta listo cuando entra a la pantalla */
-  loader = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (!en.isIntersecting) return;
-      var v = en.target.querySelector("video");
-      if (!v.getAttribute("src")) { v.setAttribute("preload", "auto"); v.setAttribute("src", v.getAttribute("data-src")); }
-      loader.unobserve(en.target);
-    });
-  }, { rootMargin: "700px 900px" });
   cards.forEach(function (c) {
     var v = c.querySelector("video");
     v.addEventListener("playing", function () { v.classList.add("on"); });
-    loader.observe(c);
   });
   if (reduced) return;
-  /* 2) reproduce solo los visibles; al salir, vuelve a verse la portada (nunca negro) */
+  /* solo se descargan y reproducen los videos que se ven; al salir vuelve la portada (nunca negro) */
   io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
       var v = en.target.querySelector("video");
       if (en.isIntersecting) {
-        if (!v.getAttribute("src")) { v.setAttribute("src", v.getAttribute("data-src")); }
+        setSrc(en.target);
         var p = v.play(); if (p && p.catch) p.catch(function () {});
-        [en.target.previousElementSibling, en.target.nextElementSibling, en.target.nextElementSibling && en.target.nextElementSibling.nextElementSibling].forEach(function (n) {
-          var nv = n && n.querySelector && n.querySelector("video");
-          if (nv && !nv.getAttribute("src")) { nv.setAttribute("preload", "auto"); nv.setAttribute("src", nv.getAttribute("data-src")); }
-        });
       } else { v.pause(); v.classList.remove("on"); }
     });
   }, { threshold: 0.45 });
   cards.forEach(function (c) { io.observe(c); });
 }
-watch();
+/* primero las imagenes: los videos arrancan cuando la pagina ya cargo */
+if (document.readyState === "complete") setTimeout(watch, 300);
+else window.addEventListener("load", function () { setTimeout(watch, 300); });
 /* Más videos: bloque compacto que se despliega en tamaño normal (misma animación de la galería) */
 var vtoggle = document.getElementById("vtoggle"), vwrap = vgrid.parentNode;
 function vflip(change) {
@@ -909,6 +906,13 @@ function vflip(change) {
 function setVideoMode(compact) {
   if (vgrid.classList.contains("compact") === compact) return;
   vflip(function () { vgrid.classList.toggle("compact", compact); });
+  Array.prototype.forEach.call(vgrid.children, function (c) {
+    var v = c.querySelector("video");
+    v.pause(); v.classList.remove("on"); v.removeAttribute("src"); v.load();
+    if (io) io.unobserve(c);
+  });
+  /* espera a que termine la animacion: solo se cargan los videos realmente visibles */
+  setTimeout(function () { if (io) Array.prototype.forEach.call(vgrid.children, function (c) { io.observe(c); }); }, reduced ? 50 : 800);
   vtoggle.textContent = compact ? "Ver en tamaño normal" : "Ver más compacto";
   vtoggle.setAttribute("aria-pressed", compact ? "false" : "true");
   if (compact) vgrid.scrollIntoView({ block: "start", behavior: reduced ? "auto" : "smooth" });
@@ -1181,7 +1185,7 @@ document.addEventListener("keydown", function (e) {
 /* breeds */
 var bEl = document.getElementById("breeds");
 bEl.innerHTML = BREEDS.map(function (b) {
-  return '<article class="breed' + (b.img ? ' has-img' : '') + '">' + (b.img ? '<div class="bimg"><img src="' + b.img + '" alt="' + b.alt + '" loading="lazy" style="object-position:' + b.pos + '"></div>' : '') + '<div class="bbody">' + (b.x ? '<span class="xtag">Raza exclusiva</span>' : '') + '<span class="tag">' + b.t + '</span><h3>' + b.n + '</h3><p>' + b.d + '</p><button type="button" data-raza="' + b.n + '">Ver detalles de ' + b.n + '</button></div></article>';
+  return '<article class="breed' + (b.img ? ' has-img' : '') + '">' + (b.img ? '<div class="bimg"><img src="' + b.img + '" alt="' + b.alt + '" loading="lazy" decoding="async" style="object-position:' + b.pos + '"></div>' : '') + '<div class="bbody">' + (b.x ? '<span class="xtag">Raza exclusiva</span>' : '') + '<span class="tag">' + b.t + '</span><h3>' + b.n + '</h3><p>' + b.d + '</p><button type="button" data-raza="' + b.n + '">Ver detalles de ' + b.n + '</button></div></article>';
 }).join("");
 var modal = document.getElementById("modal"), lastBtn = null;
 bEl.addEventListener("click", function (e) {
