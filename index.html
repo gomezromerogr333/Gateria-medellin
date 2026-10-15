@@ -491,6 +491,16 @@ h2, h3 { font-weight: 700; }
 @media (min-width: 960px) and (min-aspect-ratio: 5/4) { .cat { --cH: min(calc(97cqh - var(--fs) * .42), 150cqw); } }
 .stage { z-index: 2; }
 .cat { will-change: scale, translate; }
+
+/* Más videos: muro compacto como la galería de fotos */
+.vwall { position: relative; }
+.vgrid.compact { grid-template-columns: repeat(4, 1fr); gap: 5px; cursor: pointer; padding: 14px 0 22px; position: relative; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%); }
+@media (min-width: 700px) { .vgrid.compact { grid-template-columns: repeat(8, 1fr); gap: 6px; } }
+.vgrid.compact .reel { border-radius: 9px; pointer-events: none; }
+.vwall::before { content: ""; position: absolute; inset: -6% -4%; background: radial-gradient(ellipse at 50% 45%, rgba(156,192,170,.16), transparent 62%); pointer-events: none; }
+.vwall:has(.vgrid:not(.compact)) .vhint { display: none; }
+.vwall:has(.vgrid:not(.compact))::before { display: none; }
+.vhint { width: max-content; max-width: calc(100vw - 40px); white-space: nowrap; }
 </style>
 
 <header class="nav">
@@ -542,7 +552,7 @@ h2, h3 { font-weight: 700; }
     </div>
     <div class="reel-track" id="reel" tabindex="0" aria-label="Videos de nuestros gatitos"></div>
     <div class="more-h"><h3>Más videos</h3><span id="vcount"></span><button type="button" class="gbtn vbtn" id="vtoggle" aria-pressed="false">Ver en tamaño normal</button></div>
-    <div class="vgrid compact" id="vgrid"></div>
+    <div class="vwall" id="vwall"><div class="vgrid compact" id="vgrid"></div><button class="gal-hint vhint" id="vhint" type="button"><i aria-hidden="true">+</i><div><span>Toca para ver los videos</span><b id="vhintc"></b></div></button></div>
   </div>
 </div>
 
@@ -885,6 +895,8 @@ function setVideoMode(compact) {
   if (compact) vgrid.scrollIntoView({ block: "start", behavior: reduced ? "auto" : "smooth" });
 }
 vtoggle.addEventListener("click", function () { setVideoMode(!vgrid.classList.contains("compact")); });
+document.getElementById("vwall").addEventListener("click", function (e) { if (vgrid.classList.contains("compact")) { e.preventDefault(); setVideoMode(false); } });
+document.getElementById("vhintc").textContent = MORE.length + " videos";
 function slideBy(dir) { reel.scrollBy({ left: dir * 386, behavior: "smooth" }); }
 document.getElementById("rprev").addEventListener("click", function () { slideBy(-1); });
 document.getElementById("rnext").addEventListener("click", function () { slideBy(1); });
