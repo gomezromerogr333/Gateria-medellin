@@ -209,6 +209,12 @@ section { padding-block: 112px 0; scroll-margin-top: 56px; }
 .breed h3 { font-size: 1.7rem; letter-spacing: -.03em; }
 .breed p { color: var(--muted); font-size: .98rem; }
 .breed button { justify-self: start; margin-top: 8px; background: none; border: 0; padding: 0; color: var(--ink); font: 500 .98rem var(--font); text-decoration: underline; text-underline-offset: 5px; cursor: pointer; }
+.others-box { margin-top: 28px; background: var(--black); color: var(--on-black); border-radius: 28px; padding: clamp(28px, 5vw, 48px); display: grid; gap: 14px; justify-items: center; text-align: center; }
+.others-box .eyebrow { color: var(--warm); margin: 0; }
+.others-box h3 { margin: 0; font: 600 clamp(1.5rem, 5.2vw, 2.4rem)/1.1 var(--font); letter-spacing: -.03em; }
+.others-box p { margin: 0; color: var(--on-black-mute); max-width: 46ch; font-size: 1.02rem; line-height: 1.5; }
+.chips { list-style: none; margin: 6px 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.chips li { padding: 10px 18px; border-radius: 999px; border: 1.5px solid var(--line-black); background: rgba(255,255,255,.06); color: var(--on-black); font-weight: 600; font-size: 1.02rem; }
 .others { margin-top: 24px; color: var(--muted); font-size: .98rem; }
 
 /* catalog */
@@ -648,7 +654,13 @@ h2, h3 { font-weight: 700; }
     <p class="lead">Una guía sencilla de los gatitos enanos que tenemos y de otras razas que también encontrarás aquí.</p>
   </div>
   <div class="breeds" id="breeds"></div>
-  <p class="others">También tenemos Persa, British, Scottish Fold, American Curl, Highland Fold y Sphynx. Pregunta por disponibilidad.</p>
+  <div class="others-box">
+    <p class="eyebrow">Y además</p>
+    <h3>También tenemos otras razas</h3>
+    <p>No solo gatitos enanos: también encuentras razas de patas largas, con la misma crianza y el mismo acompañamiento.</p>
+    <ul class="chips" id="others-chips"></ul>
+    <a class="btn btn-cream" id="wa-others" href="#" target="_blank" rel="noopener">Preguntar por disponibilidad</a>
+  </div>
 </section>
 
 <div class="band vband" id="valores"><div class="wrap">
@@ -792,6 +804,7 @@ var BREEDS = [
     e: "Une la dulzura de los enanos con la energía del Bengalí. Perfecto para quien busca un compañero juguetón.", cl: "Carácter dócil y activo", c: "tierno, muy apegado a su familia, más activo y juguetón" }
 ];
 var OTHERS = ["Persa", "British", "Scottish Fold", "American Curl", "Highland Fold", "Sphynx"];
+document.getElementById("others-chips").innerHTML = OTHERS.map(function (o) { return "<li>" + o + "</li>"; }).join("");
 /* Foto de ejemplo por raza: agrega img: "img/m/pNN.jpg" a cada raza con el número de la galería. */
 var DEFAULT_IMG = "img/gato-cut2.webp";
 
@@ -1226,6 +1239,7 @@ document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !m
 /* contact */
 var hello = "Hola, vi su página y quiero información sobre sus gatitos.";
 ["wa-nav", "wa-hero", "wa-contact"].forEach(function (id) { document.getElementById(id).setAttribute("href", wa(hello)); });
+document.getElementById("wa-others").setAttribute("href", wa("Hola, vi su página y quiero saber qué razas de patas largas tienen disponibles (Persa, British, Scottish Fold, American Curl, Highland Fold o Sphynx)."));
 document.getElementById("copy").addEventListener("click", function () {
   var b = this, ok = function () { b.textContent = "Número copiado"; };
   try { navigator.clipboard.writeText("+57 350 271 5786").then(ok, function () { b.textContent = "Copia el número de arriba"; }); }
