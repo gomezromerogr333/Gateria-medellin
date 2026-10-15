@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nuestros Gatitos</title>
-<meta name="description" content="Gatos enanos de patas cortas: Munchkin, Minuet, Kinkalow, Munchkin Fold, Bambino y Dwelf. Más de 10 años de experiencia llevando amor a hogares en todo el mundo. Medellín, Antioquia.">
+<meta name="description" content="Gatos enanos de patas cortas: Munchkin, Minuet, Kinkalow, Munchkin Fold, Bambino, Dwelf y Genetta. Más de 10 años de experiencia llevando amor a hogares en todo el mundo. Medellín, Antioquia.">
 <meta name="theme-color" content="#050B08">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CO">
@@ -515,6 +515,8 @@ h2, h3 { font-weight: 700; }
 .bimg img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
 .breed:hover .bimg img { transform: scale(1.04); }
 .bph.real img { padding: 0; object-fit: cover; }
+
+.sheet.noimg { grid-template-columns: 1fr; max-width: 460px; }
 </style>
 
 <header class="nav">
@@ -632,7 +634,7 @@ h2, h3 { font-weight: 700; }
   <div class="trio3">
     <article class="t3"><img src="img/w/p39.jpg" width="800" height="800" loading="lazy" alt="Gatito de tres colores sobre el césped, con sus patitas cortas"><div class="t3-b"><h3>Patitas cortas</h3><p>Su enanismo es natural: cuerpo de gato con patitas pequeñas, y las mismas ganas de correr, saltar y jugar.</p></div></article>
     <article class="t3"><img src="img/m/p7.jpg" width="420" height="420" loading="lazy" alt="Gatito blanco de ojos azules sobre una mano"><div class="t3-b"><h3>Hipoalergénicos</h3><p>Una condición hipoalergénica natural, que los hace una gran opción para hogares sensibles a los gatos.</p></div></article>
-    <article class="t3 t3-main"><img src="img/w/p32.jpg" width="800" height="800" loading="lazy" alt="Un niño abraza a su gatito atigrado"><div class="t3-b"><span class="t3-tag">Lo más especial</span><h3>Su carácter lo cambia todo.</h3><p>Son dóciles, amorosos y tiernos como pocos. Te siguen por la casa, buscan tus brazos y se acomodan a tu lado como lo haría un perrito. Son gatos de hogar, de los que viven en familia.</p><p class="t3-q">Lo demás cuesta ponerlo en palabras. Se siente la primera vez que lo cargas.</p></div></article>
+    <article class="t3 t3-main"><img src="img/w/p32.jpg" width="800" height="800" loading="lazy" alt="Un niño abraza a su gatito atigrado"><div class="t3-b"><span class="t3-tag">Lo más especial</span><h3>Su carácter lo cambia todo.</h3><p>Son mucho más tranquilos que un gato común: dóciles, amorosos y tiernos como pocos. Te siguen por la casa, buscan tus brazos y se acomodan a tu lado como lo haría un perrito. Son gatos de hogar, de los que viven en familia.</p><p class="t3-q">Lo demás cuesta ponerlo en palabras. Se siente la primera vez que lo cargas.</p></div></article>
   </div>
 </section>
 
@@ -656,7 +658,7 @@ h2, h3 { font-weight: 700; }
     <div class="panel">
       <p class="eyebrow">Gatos enanos</p>
       <p class="price"><span>$3.500.000</span><span class="to">– $6.500.000</span></p>
-      <p class="pnote">Pesos colombianos, según la raza. Munchkin, Minuet, Kinkalow, Munchkin Fold, Bambino y Dwelf.</p>
+      <p class="pnote">Pesos colombianos, según la raza. Munchkin, Minuet, Kinkalow, Munchkin Fold, Bambino, Dwelf y Genetta.</p>
     </div>
     <div class="panel">
       <p class="eyebrow">Patas largas</p>
@@ -767,24 +769,27 @@ var PHONE = "573502715786";
 function wa(text) { return "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(text); }
 
 var BREEDS = [
-  { img: "img/razas/munchkin.jpg", pos: "50% 30%", alt: "Gatito Munchkin blanco y gris con collar, sentado en un sofá azul", n: "Munchkin", t: "Patas cortas", d: "La raza enana más conocida: cuerpo de tamaño normal con patas cortas. Juguetón y sociable.",
-    f: [["Origen", "Estados Unidos, años 80"], ["Peso adulto", "2 a 4 kg"], ["Pelaje", "Corto o semilargo, muchos colores"], ["Carácter", "Juguetón, curioso y muy sociable"], ["Cuidados", "Cepillado semanal; se adapta muy bien a apartamentos"]],
-    e: "Corre, salta y juega como cualquier gato; sus patas cortas son un rasgo natural de la raza." },
-  { img: "img/razas/minuet.jpg", pos: "50% 28%", alt: "Gatito Minuet de tres colores y ojos azules mirando hacia arriba", n: "Minuet", t: "También Napoleón", d: "Cruce de Munchkin y Persa. Cara redondeada, pelaje abundante y patas cortas.",
-    f: [["Origen", "Cruce de Munchkin y Persa"], ["Peso adulto", "2 a 4 kg"], ["Pelaje", "Denso y suave, corto o largo"], ["Carácter", "Tierno, tranquilo y muy apegado a su familia"], ["Cuidados", "Cepillado frecuente para mantener el pelaje"]],
+  { img: "img/razas/munchkin.jpg", pos: "50% 30%", alt: "Gatito Munchkin blanco y gris con collar, sentado en un sofá azul", n: "Munchkin", t: "Patas cortas", d: "La raza enana más conocida: cuerpo de tamaño normal con patas cortas. Tierno y familiar, con un poco más de energía.",
+    f: [["Origen", "Estados Unidos, años 80"], ["Peso adulto", "2 a 4 kg"], ["Pelaje", "Corto o semilargo, muchos colores"], ["Carácter", "Tierno y apegado a su familia, algo más activo y juguetón"], ["Cuidados", "Cepillado semanal; se adapta muy bien a apartamentos"]],
+    e: "Corre, salta y juega como cualquier gato; sus patas cortas son un rasgo natural de la raza.", cl: "Carácter dócil y activo", c: "tierno, familiar y con un poco más de energía" },
+  { img: "img/razas/minuet.jpg", pos: "50% 28%", alt: "Gatito Minuet de tres colores y ojos azules mirando hacia arriba", n: "Minuet", t: "También Napoleón", d: "Tiene genes del Munchkin y del Persa. Cara redondeada, pelaje abundante y patas cortas.",
+    f: [["Genes", "Munchkin y Persa"], ["Peso adulto", "2 a 4 kg"], ["Pelaje", "Denso y suave, corto o largo"], ["Carácter", "Tierno, tranquilo y muy apegado a su familia"], ["Cuidados", "Cepillado frecuente para mantener el pelaje"]],
     e: "Una carita de peluche en un cuerpo compacto. Ideal para hogares tranquilos." },
-  { x: 1, img: "img/razas/kinkalow.jpg", pos: "40% 40%", alt: "Gatito Kinkalow crema con orejas curvadas hacia atrás", n: "Kinkalow", t: "Orejas curvas", d: "Cruce de Munchkin y American Curl. Patas cortas y orejas que se curvan hacia atrás.",
-    f: [["Origen", "Cruce de Munchkin y American Curl"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Orejas curvadas hacia atrás y patas cortas"], ["Carácter", "Activo, cariñoso y muy sociable"], ["Cuidados", "Limpieza suave de orejas y cepillado semanal"]],
-    e: "Una de las razas más raras: combina dos rasgos poco comunes en un solo gatito." },
-  { x: 1, img: "img/razas/munchkin-fold.jpg", pos: "50% 45%", alt: "Gatito Munchkin Fold crema de ojos azules y orejas plegadas", n: "Munchkin Fold", t: "Orejas plegadas", d: "Patas cortas con orejas plegadas hacia adelante. Cara dulce y redondeada.",
-    f: [["Origen", "Cruce de Munchkin y Scottish Fold"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Orejas plegadas hacia adelante y patas cortas"], ["Carácter", "Dulce, tranquilo y compañero"], ["Cuidados", "Cepillado semanal y revisión de orejas"]],
+  { x: 1, img: "img/razas/kinkalow.jpg", pos: "40% 40%", alt: "Gatito Kinkalow crema con orejas curvadas hacia atrás", n: "Kinkalow", t: "Orejas curvas", d: "Tiene genes del Munchkin, del Persa y del American Curl. Patas cortas y orejas que se curvan hacia atrás.",
+    f: [["Genes", "Munchkin, Persa y American Curl"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Orejas curvadas hacia atrás y patas cortas"], ["Carácter", "Tierno, amoroso y tranquilo"], ["Cuidados", "Limpieza suave de orejas y cepillado semanal"]],
+    e: "Una de las razas más raras: combina rasgos poco comunes en un solo gatito." },
+  { x: 1, img: "img/razas/munchkin-fold.jpg", pos: "50% 45%", alt: "Gatito Munchkin Fold crema de ojos azules y orejas plegadas", n: "Munchkin Fold", t: "Orejas plegadas", d: "Tiene genes del Munchkin y del Scottish Fold. Patas cortas con orejas plegadas hacia adelante y cara dulce.",
+    f: [["Genes", "Munchkin y Scottish Fold"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Orejas plegadas hacia adelante y patas cortas"], ["Carácter", "Dulce, tranquilo y compañero"], ["Cuidados", "Cepillado semanal y revisión de orejas"]],
     e: "Cara redonda, mirada tierna y un tamaño que enamora a primera vista." },
-  { x: 1, n: "Bambino", t: "Sin pelo", d: "Cruce de Sphynx y Munchkin. Patas cortas y piel casi sin pelo; necesita cuidado de la piel.",
-    f: [["Origen", "Cruce de Sphynx y Munchkin"], ["Peso adulto", "2 a 4 kg"], ["Piel", "Casi sin pelo, con arrugas y cálida al tacto"], ["Carácter", "Muy cariñoso, busca compañía y calor"], ["Cuidados", "Baños periódicos, protección del frío y del sol"]],
+  { x: 1, n: "Bambino", t: "Sin pelo", d: "Tiene genes del Sphynx y del Munchkin. Patas cortas y piel casi sin pelo; necesita cuidado de la piel.",
+    f: [["Genes", "Sphynx y Munchkin"], ["Peso adulto", "2 a 4 kg"], ["Piel", "Casi sin pelo, con arrugas y cálida al tacto"], ["Carácter", "Muy cariñoso, tranquilo y busca compañía y calor"], ["Cuidados", "Baños periódicos, protección del frío y del sol"]],
     e: "Un gato muy pegado a su familia. Su piel pide un poco más de atención que la de otras razas." },
-  { x: 1, n: "Dwelf", t: "Sin pelo, orejas curvas", d: "Patas cortas, piel sin pelo y orejas curvas. Una raza poco común.",
-    f: [["Origen", "Cruce de Sphynx, Munchkin y American Curl"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Sin pelo, orejas curvas y patas cortas"], ["Carácter", "Cariñoso, juguetón y muy sociable"], ["Cuidados", "Baños periódicos, abrigo en climas fríos"]],
-    e: "Reúne tres rasgos poco comunes. Una de las razas más exóticas que existen." }
+  { x: 1, n: "Dwelf", t: "Sin pelo, orejas curvas", d: "Tiene genes del Sphynx, del Munchkin y del American Curl. Patas cortas, piel sin pelo y orejas curvas.",
+    f: [["Genes", "Sphynx, Munchkin y American Curl"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Sin pelo, orejas curvas y patas cortas"], ["Carácter", "Cariñoso, tranquilo y muy sociable"], ["Cuidados", "Baños periódicos, abrigo en climas fríos"]],
+    e: "Reúne tres rasgos poco comunes. Una de las razas más exóticas que existen." },
+  { n: "Genetta", t: "Patas cortas, más activo", d: "Tiene genes del Munchkin y del Bengalí. Patas cortas y un temperamento un poco más activo que el de otras razas enanas.",
+    f: [["Genes", "Munchkin y Bengalí"], ["Peso adulto", "2 a 4 kg"], ["Pelaje", "Corto, con el aspecto manchado del Bengalí"], ["Carácter", "Tierno y familiar, más activo y juguetón"], ["Cuidados", "Cepillado ocasional y mucho juego"]],
+    e: "Une la dulzura de los enanos con la energía del Bengalí. Perfecto para quien busca un compañero juguetón.", cl: "Carácter dócil y activo", c: "tierno, familiar y más activo y juguetón" }
 ];
 var OTHERS = ["Persa", "British", "Scottish Fold", "American Curl", "Highland Fold", "Sphynx"];
 /* Foto de ejemplo por raza: agrega img: "img/m/pNN.jpg" a cada raza con el número de la galería. */
@@ -1190,13 +1195,14 @@ function openBreed(name) {
   if (!b) return;
   var msg = "Hola, me interesa la raza " + b.n + ". ¿Qué gatitos tienen y cuál es el valor?";
   document.getElementById("sheet").innerHTML =
-    '<div class="ph bph' + (b.img ? ' real' : '') + '"><img src="' + (b.img || DEFAULT_IMG) + '" alt="' + (b.alt || ('Gatito ' + b.n)) + '"' + (b.img ? ' style="object-position:' + b.pos + '"' : '') + '>' + (b.x ? '<b class="pill">Raza exclusiva</b>' : '') + '</div>' +
+    (b.img ? '<div class="ph bph real"><img src="' + b.img + '" alt="' + b.alt + '" style="object-position:' + b.pos + '">' + (b.x ? '<b class="pill">Raza exclusiva</b>' : '') + '</div>' : '') +
     '<div class="sheet-b"><button class="close" type="button" id="close">Cerrar</button><h2 id="m-name" style="font-size:2rem">' + b.n + '</h2>' +
     '<p style="color:var(--muted)">' + b.e + '</p>' +
-    '<div class="m3"><span><b>Enanismo natural</b><i>patitas cortas</i></span><span><b>Hipoalergénico</b><i>condición natural</i></span><span><b>Carácter dócil</b><i>tierno y amoroso, como un perrito</i></span></div>' +
+    '<div class="m3"><span><b>Enanismo natural</b><i>patitas cortas</i></span><span><b>Hipoalergénico</b><i>condición natural</i></span><span><b>' + (b.cl || 'Carácter tranquilo') + '</b><i>' + (b.c || 'mucho más tierno y apegado a su familia que un gato común') + '</i></span></div>' +
     '<dl>' + b.f.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join("") + '</dl>' +
     '<p class="price-note">El valor depende de la raza, el gatito y su línea genética. Te lo confirmamos por WhatsApp o llamada, sin costos ocultos.</p>' +
     '<a class="btn btn-primary" href="' + wa(msg) + '" target="_blank" rel="noopener">Preguntar por ' + b.n + '</a></div>';
+  document.getElementById("sheet").classList.toggle("noimg", !b.img);
   modal.hidden = false;
   document.body.style.overflow = "hidden";
   document.getElementById("close").focus();
