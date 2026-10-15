@@ -133,6 +133,15 @@ section { padding-block: 112px 0; scroll-margin-top: 56px; }
 .more-h span { color: var(--on-black-mute); font-size: .9rem; }
 .vgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 @media (max-width: 900px) { .vgrid { grid-template-columns: repeat(2, 1fr); } }
+.more-h { flex-wrap: wrap; }
+.vbtn { margin-left: auto; }
+.vgrid.compact { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+@media (min-width: 900px) { .vgrid.compact { grid-template-columns: repeat(8, 1fr); gap: 10px; } }
+.vgrid.compact .reel { border-radius: 14px; }
+.vgrid.compact .reel video { display: none; }
+.vgrid.compact .reel .tag { left: 50%; bottom: 50%; transform: translate(-50%, 50%); padding: 0; width: 32px; height: 32px; justify-content: center; font-size: .7rem; gap: 0; }
+.vgrid.compact .reel .tag span { display: none; }
+.vgrid.compact .reel::after { display: none; }
 .vgrid .reel { flex: none; width: 100%; border-radius: 26px; }
 /* galeria: mosaico -> miniaturas -> completo */
 .gal { position: relative; }
@@ -533,8 +542,8 @@ h2, h3 { font-weight: 700; }
       <div class="arrows"><button class="arr" id="rprev" type="button" aria-label="Video anterior">←</button><button class="arr" id="rnext" type="button" aria-label="Video siguiente">→</button></div>
     </div>
     <div class="reel-track" id="reel" tabindex="0" aria-label="Videos de nuestros gatitos"></div>
-    <div class="more-h"><h3>Más videos</h3><span id="vcount"></span></div>
-    <div class="vgrid" id="vgrid"></div>
+    <div class="more-h"><h3>Más videos</h3><span id="vcount"></span><button type="button" class="gbtn vbtn" id="vtoggle" aria-pressed="false">Ver en tamaño normal</button></div>
+    <div class="vgrid compact" id="vgrid"></div>
   </div>
 </div>
 
@@ -809,20 +818,20 @@ var MORE = ["v10", "v7", "v13", "v9", "v27", "v3", "v4", "v5", "v17", "v18", "v1
 var VIDEOS = REEL.concat(MORE);
 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function card(v, i) {
-  return '<button class="reel" type="button" data-i="' + i + '" style="background-image:url(vid/' + v + '.jpg)" aria-label="Ver video ' + (i + 1) + ' con sonido"><video muted loop playsinline preload="none" poster="vid/' + v + '.jpg" data-src="vid/' + v + '.mp4"></video><span class="tag">▶ Ver con sonido</span></button>';
+  return '<button class="reel" type="button" data-i="' + i + '" style="background-image:url(vid/' + v + '.jpg)" aria-label="Ver video ' + (i + 1) + ' con sonido"><video muted loop playsinline preload="none" poster="vid/' + v + '.jpg" data-src="vid/' + v + '.mp4"></video><span class="tag">▶<span>&nbsp;Ver con sonido</span></span></button>';
 }
 var reel = document.getElementById("reel"), vgrid = document.getElementById("vgrid");
 reel.innerHTML = REEL.map(function (v, i) { return card(v, i); }).join("");
 vgrid.innerHTML = MORE.map(function (v, i) { return card(v, REEL.length + i); }).join("");
 document.getElementById("vcount").textContent = VIDEOS.length + " videos en total";
 var cards = Array.prototype.slice.call(document.querySelectorAll(".reel"));
-var io = null;
+var io = null, loader = null;
 function watch() {
   if (!("IntersectionObserver" in window)) return;
   /* 1) carga con anticipacion: el video ya esta listo cuando entra a la pantalla */
-  var loader = new IntersectionObserver(function (entries) {
+  loader = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
-      if (!en.isIntersecting) return;
+      if (!en.isIntersecting || en.target.closest(".vgrid.compact")) return;
       var v = en.target.querySelector("video");
       if (!v.getAttribute("src")) { v.setAttribute("preload", "auto"); v.setAttribute("src", v.getAttribute("data-src")); }
       loader.unobserve(en.target);
@@ -838,6 +847,7 @@ function watch() {
   io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
       var v = en.target.querySelector("video");
+      if (en.target.closest(".vgrid.compact")) { v.pause(); return; }
       if (en.isIntersecting) {
         if (!v.getAttribute("src")) { v.setAttribute("src", v.getAttribute("data-src")); }
         var p = v.play(); if (p && p.catch) p.catch(function () {});
@@ -851,6 +861,18 @@ function watch() {
   cards.forEach(function (c) { io.observe(c); });
 }
 watch();
+/* Más videos: miniaturas al inicio; el cliente decide verlos en tamaño normal */
+var vtoggle = document.getElementById("vtoggle");
+vtoggle.addEventListener("click", function () {
+  var compact = vgrid.classList.toggle("compact");
+  vtoggle.textContent = compact ? "Ver en tamaño normal" : "Ver como miniaturas";
+  vtoggle.setAttribute("aria-pressed", compact ? "false" : "true");
+  Array.prototype.forEach.call(vgrid.children, function (c) {
+    if (compact) { c.querySelector("video").pause(); c.querySelector("video").classList.remove("on"); }
+    else { if (loader) loader.observe(c); if (io) { io.unobserve(c); io.observe(c); } }
+  });
+  if (!compact) vgrid.scrollIntoView({ block: "start", behavior: reduced ? "auto" : "smooth" });
+});
 function slideBy(dir) { reel.scrollBy({ left: dir * 386, behavior: "smooth" }); }
 document.getElementById("rprev").addEventListener("click", function () { slideBy(-1); });
 document.getElementById("rnext").addEventListener("click", function () { slideBy(1); });
