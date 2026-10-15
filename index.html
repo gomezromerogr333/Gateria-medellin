@@ -510,7 +510,8 @@ h2, h3 { font-weight: 700; }
 /* fotos de razas */
 .breed.has-img { padding: 0; overflow: hidden; gap: 0; }
 .breed .bbody { display: grid; gap: 10px; align-content: start; padding: 22px 24px 26px; }
-.breed:not(.has-img) .bbody { padding: 30px 28px; }
+.breed:not(.has-img) .bbody { padding: 0; }
+.bbody button { justify-self: start; text-align: left; }
 .bimg { aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface-2); }
 .bimg img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
 .breed:hover .bimg img { transform: scale(1.04); }
@@ -781,12 +782,9 @@ var BREEDS = [
   { x: 1, img: "img/razas/munchkin-fold.jpg", pos: "50% 45%", alt: "Gatito Munchkin Fold crema de ojos azules y orejas plegadas", n: "Munchkin Fold", t: "Orejas plegadas", d: "Tiene genes del Munchkin y del Scottish Fold. Patas cortas con orejas plegadas hacia adelante y cara dulce.",
     f: [["Genes", "Munchkin y Scottish Fold"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Orejas plegadas hacia adelante y patas cortas"], ["Carácter", "Dulce, tranquilo y compañero"], ["Cuidados", "Cepillado semanal y revisión de orejas"]],
     e: "Cara redonda, mirada tierna y un tamaño que enamora a primera vista." },
-  { x: 1, n: "Bambino", t: "Sin pelo", d: "Tiene genes del Sphynx y del Munchkin. Patas cortas y piel casi sin pelo; necesita cuidado de la piel.",
-    f: [["Genes", "Sphynx y Munchkin"], ["Peso adulto", "2 a 4 kg"], ["Piel", "Casi sin pelo, con arrugas y cálida al tacto"], ["Carácter", "Muy cariñoso, tranquilo y busca compañía y calor"], ["Cuidados", "Baños periódicos, protección del frío y del sol"]],
-    e: "Un gato muy pegado a su familia. Su piel pide un poco más de atención que la de otras razas." },
-  { x: 1, n: "Dwelf", t: "Sin pelo, orejas curvas", d: "Tiene genes del Sphynx, del Munchkin y del American Curl. Patas cortas, piel sin pelo y orejas curvas.",
-    f: [["Genes", "Sphynx, Munchkin y American Curl"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Sin pelo, orejas curvas y patas cortas"], ["Carácter", "Cariñoso, tranquilo y muy sociable"], ["Cuidados", "Baños periódicos, abrigo en climas fríos"]],
-    e: "Reúne tres rasgos poco comunes. Una de las razas más exóticas que existen." },
+  { x: 1, n: "Bambino y Dwelf", t: "Sin pelo", d: "Dos razas sin pelo, de patas cortas y piel suave. La diferencia: el Dwelf, además, tiene las orejas curvas del American Curl.",
+    f: [["Genes", "Bambino: Sphynx y Munchkin. Dwelf: Sphynx, Munchkin y American Curl"], ["Peso adulto", "2 a 4 kg"], ["Rasgo único", "Sin pelo y patas cortas; el Dwelf con orejas curvas"], ["Carácter", "Muy cariñosos, tranquilos y buscan compañía y calor"], ["Cuidados", "Baños periódicos, protección del frío y del sol"]],
+    e: "Gatos sin pelo muy pegados a su familia. Dos razas exclusivas y poco comunes; su piel pide un poco más de atención." },
   { n: "Genetta", t: "Patas cortas, más activo", d: "Tiene genes del Munchkin y del Bengalí. Patas cortas y un temperamento un poco más activo que el de otras razas enanas.",
     f: [["Genes", "Munchkin y Bengalí"], ["Peso adulto", "2 a 4 kg"], ["Pelaje", "Corto, con el aspecto manchado del Bengalí"], ["Carácter", "Tierno y familiar, más activo y juguetón"], ["Cuidados", "Cepillado ocasional y mucho juego"]],
     e: "Une la dulzura de los enanos con la energía del Bengalí. Perfecto para quien busca un compañero juguetón.", cl: "Carácter dócil y activo", c: "tierno, familiar y más activo y juguetón" }
