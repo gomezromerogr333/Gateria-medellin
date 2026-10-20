@@ -1,0 +1,23 @@
+:root{--bg:#F4F5F2;--surface:#fff;--ink:#101A16;--muted:#5B6A61;--line:#DBE1DA;--accent:#1B3F30;--accent-ink:#F5F8F2;--warm:#F0AE86;--font:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#0A1210;--surface:#111C16;--ink:#EFF2EC;--muted:#9DAEA3;--line:#23332B;--accent:#CFE6D8;--accent-ink:#0A1210;color-scheme:dark}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px max(20px,env(safe-area-inset-right)) 14px max(20px,env(safe-area-inset-left));background:#050B08;color:#F3F6F7}
+.top a{color:#F3F6F7;text-decoration:none;font-weight:700}
+.top .wa{background:#F6EFE6;color:#101A16;padding:9px 16px;border-radius:999px;font-size:.92rem}
+main{max-width:760px;margin:0 auto;padding:28px 20px 72px}
+.crumbs{font-size:.88rem;color:var(--muted);margin-bottom:18px}.crumbs a{color:var(--muted)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.03em;margin:0 0 14px}
+h2{font-size:1.5rem;letter-spacing:-.02em;margin:40px 0 10px}
+.lead{font-size:1.15rem;color:var(--muted);margin:0 0 22px}
+.hero{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 30%;border-radius:24px;display:block;margin:0 0 8px;background:var(--line)}
+.cap{font-size:.85rem;color:var(--muted);margin:0 0 20px}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+dt{font-weight:700}dd{margin:0}
+.note{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--warm);border-radius:14px;padding:14px 18px}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:700;padding:14px 24px;border-radius:999px;margin:8px 0}
+ul{padding-left:1.2em}li{margin:6px 0}
+.others a{margin-right:14px;color:var(--ink);font-weight:600}
+footer{max-width:760px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:.9rem}
+a:focus-visible,.btn:focus-visible{outline:3px solid var(--warm);outline-offset:3px}
+@media (max-width:520px){dl{grid-template-columns:1fr;gap:2px}dt{margin-top:8px}}

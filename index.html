@@ -1218,9 +1218,10 @@ document.addEventListener("keydown", function (e) {
 });
 
 /* breeds */
+var SLUGS = { "Munchkin": "munchkin", "Minuet": "minuet", "Kinkalow": "kinkalow" };
 var bEl = document.getElementById("breeds");
 bEl.innerHTML = BREEDS.map(function (b) {
-  return '<article class="breed' + (b.img ? ' has-img' : '') + '">' + (b.img ? '<div class="bimg"><img src="' + b.img + '" alt="' + b.alt + '" loading="lazy" style="object-position:' + b.pos + '"></div>' : '') + '<div class="bbody">' + (b.x ? '<span class="xtag">Raza exclusiva</span>' : '') + '<span class="tag">' + b.t + '</span><h3>' + b.n + '</h3><p>' + b.d + '</p><button type="button" data-raza="' + b.n + '">Ver detalles de ' + b.n + '</button></div></article>';
+  return '<article class="breed' + (b.img ? ' has-img' : '') + '">' + (b.img ? '<div class="bimg"><img src="' + b.img + '" alt="' + b.alt + '" loading="lazy" style="object-position:' + b.pos + '"></div>' : '') + '<div class="bbody">' + (b.x ? '<span class="xtag">Raza exclusiva</span>' : '') + '<span class="tag">' + b.t + '</span><h3>' + b.n + '</h3><p>' + b.d + '</p><button type="button" data-raza="' + b.n + '">Ver detalles de ' + b.n + '</button>' + (SLUGS[b.n] ? '<p style="margin:10px 0 0"><a href="razas/' + SLUGS[b.n] + '/">Leer la guía de ' + b.n + '</a></p>' : '') + '</div></article>';
 }).join("");
 var modal = document.getElementById("modal"), lastBtn = null;
 bEl.addEventListener("click", function (e) {
