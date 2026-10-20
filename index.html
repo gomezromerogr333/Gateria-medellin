@@ -609,7 +609,7 @@ h2, h3 { font-weight: 700; }
 <section id="exclusivas" class="wrap center" style="display:grid;gap:0;padding-block:112px 0">
   <p class="eyebrow" style="margin-bottom:18px">Pioneros en Latinoamérica</p>
   <h2 style="max-width:20ch">Razas exclusivas, de las más raras y exóticas.</h2>
-  <p class="lead" style="margin-top:20px;text-align:center">Fuimos el primer criadero del mundo en traer los gatos enanos a Latinoamérica. Con algunas de estas razas, somos los únicos en la región.</p>
+  <p class="lead" style="margin-top:20px;text-align:center">Fuimos el primer criadero del mundo en traer los gatos enanos a Latinoamérica. Con algunas de estas razas, somos los únicos en la región. Nuestros gatos enanos fueron importados de Rusia.</p>
   <div class="xchips"><span>Kinkalow</span><span>Munchkin Fold</span><span>Bambino</span><span>Dwelf</span></div>
 </section>
 
@@ -785,6 +785,7 @@ h2, h3 { font-weight: 700; }
 <footer>
   <div class="wrap">
     <div><b>Nuestros Gatitos</b> · Medellín, Antioquia y Restrepo, Meta · Colombia</div>
+    <div>Guías: <a href="razas/munchkin/">Munchkin</a> · <a href="razas/minuet/">Minuet</a> · <a href="razas/kinkalow/">Kinkalow</a></div>
     <div>Instagram: @nuestros_gaticos</div>
   </div>
 </footer>
@@ -1221,7 +1222,7 @@ document.addEventListener("keydown", function (e) {
 var SLUGS = { "Munchkin": "munchkin", "Minuet": "minuet", "Kinkalow": "kinkalow" };
 var bEl = document.getElementById("breeds");
 bEl.innerHTML = BREEDS.map(function (b) {
-  return '<article class="breed' + (b.img ? ' has-img' : '') + '">' + (b.img ? '<div class="bimg"><img src="' + b.img + '" alt="' + b.alt + '" loading="lazy" style="object-position:' + b.pos + '"></div>' : '') + '<div class="bbody">' + (b.x ? '<span class="xtag">Raza exclusiva</span>' : '') + '<span class="tag">' + b.t + '</span><h3>' + b.n + '</h3><p>' + b.d + '</p><button type="button" data-raza="' + b.n + '">Ver detalles de ' + b.n + '</button>' + (SLUGS[b.n] ? '<p style="margin:10px 0 0"><a href="razas/' + SLUGS[b.n] + '/">Leer la guía de ' + b.n + '</a></p>' : '') + '</div></article>';
+  return '<article class="breed' + (b.img ? ' has-img' : '') + '">' + (b.img ? '<div class="bimg"><img src="' + b.img + '" alt="' + b.alt + '" loading="lazy" style="object-position:' + b.pos + '"></div>' : '') + '<div class="bbody">' + (b.x ? '<span class="xtag">Raza exclusiva</span>' : '') + '<span class="tag">' + b.t + '</span><h3>' + b.n + '</h3><p>' + b.d + '</p><button type="button" data-raza="' + b.n + '">Ver detalles de ' + b.n + '</button>' + (SLUGS[b.n] ? '<p style="margin:14px 0 0"><a href="razas/' + SLUGS[b.n] + '/" style="color:var(--ink);font-weight:700;text-decoration:underline">Leer la guía de ' + b.n + ' →</a></p>' : '') + '</div></article>';
 }).join("");
 var modal = document.getElementById("modal"), lastBtn = null;
 bEl.addEventListener("click", function (e) {
