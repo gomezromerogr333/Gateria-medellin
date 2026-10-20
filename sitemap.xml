@@ -1,43 +1,211 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://gateria-medellin.vercel.app/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-1.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-2.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-3.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-4.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-5.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-6.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-7.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-scottish-fold-medellin-8.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-9.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-10.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-11.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-12.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-13.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-14.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-15.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-16.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-17.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-18.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-19.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-scottish-fold-medellin-20.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-21.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-scottish-fold-medellin-22.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-23.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-24.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-25.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-26.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-27.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-28.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-29.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-30.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-31.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-32.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-33.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-34.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-35.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-36.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-37.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-38.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-39.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-40.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-41.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-42.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-43.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-44.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-persa-medellin-45.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-persa-medellin-46.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-47.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-48.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-49.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-50.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-51.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/gatito-munchkin-medellin-52.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gateria-medellin.vercel.app/razas/munchkin/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/razas/gatito-munchkin-medellin.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gateria-medellin.vercel.app/razas/minuet/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/razas/gatito-minuet-munchkin-persa-medellin.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gateria-medellin.vercel.app/razas/kinkalow/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/razas/gatito-kinkalow-munchkin-medellin.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gateria-medellin.vercel.app/razas/munchkin-fold/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
+    <image:image>
+      <image:loc>https://gateria-medellin.vercel.app/img/razas/gatito-munchkin-fold-medellin.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://gateria-medellin.vercel.app/razas/bambino/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://gateria-medellin.vercel.app/razas/dwelf/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://gateria-medellin.vercel.app/razas/genetta/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://gateria-medellin.vercel.app/guias/gatos-enanos/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://gateria-medellin.vercel.app/guias/gateria-en-medellin/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
   </url>
 </urlset>
