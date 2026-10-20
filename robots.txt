@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gateria-medellin.vercel.app/sitemap.xml
