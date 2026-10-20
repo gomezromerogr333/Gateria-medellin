@@ -785,7 +785,8 @@ h2, h3 { font-weight: 700; }
 <footer>
   <div class="wrap">
     <div><b>Nuestros Gatitos</b> · Medellín, Antioquia y Restrepo, Meta · Colombia</div>
-    <div>Guías: <a href="razas/munchkin/">Munchkin</a> · <a href="razas/minuet/">Minuet</a> · <a href="razas/kinkalow/">Kinkalow</a></div>
+    <div>Guías: <a href="guias/gatos-enanos/">Gatos enanos</a> · <a href="guias/gateria-en-medellin/">Gatería en Medellín</a></div>
+    <div>Razas: <a href="razas/munchkin/">Munchkin</a> · <a href="razas/minuet/">Minuet</a> · <a href="razas/kinkalow/">Kinkalow</a> · <a href="razas/munchkin-fold/">Munchkin Fold</a> · <a href="razas/bambino/">Bambino</a> · <a href="razas/dwelf/">Dwelf</a> · <a href="razas/genetta/">Genetta</a></div>
     <div>Instagram: @nuestros_gaticos</div>
   </div>
 </footer>
@@ -1219,10 +1220,23 @@ document.addEventListener("keydown", function (e) {
 });
 
 /* breeds */
-var SLUGS = { "Munchkin": "munchkin", "Minuet": "minuet", "Kinkalow": "kinkalow" };
+var GUIDES = {
+  "Munchkin": [["munchkin", "Munchkin"]],
+  "Minuet": [["minuet", "Minuet"]],
+  "Kinkalow": [["kinkalow", "Kinkalow"]],
+  "Munchkin Fold": [["munchkin-fold", "Munchkin Fold"]],
+  "Genetta": [["genetta", "Genetta"]],
+  "Bambino y Dwelf": [["bambino", "Bambino"], ["dwelf", "Dwelf"]]
+};
+function guideLinks(b) {
+  var g = GUIDES[b.n]; if (!g) return "";
+  return '<p style="margin:18px 0 0;font-weight:700">' + g.map(function (x) {
+    return '<a href="razas/' + x[0] + '/" style="color:var(--ink);text-decoration:underline">Leer la guía de ' + x[1] + ' →</a>';
+  }).join('<br>') + '</p>';
+}
 var bEl = document.getElementById("breeds");
 bEl.innerHTML = BREEDS.map(function (b) {
-  return '<article class="breed' + (b.img ? ' has-img' : '') + '">' + (b.img ? '<div class="bimg"><img src="' + b.img + '" alt="' + b.alt + '" loading="lazy" style="object-position:' + b.pos + '"></div>' : '') + '<div class="bbody">' + (b.x ? '<span class="xtag">Raza exclusiva</span>' : '') + '<span class="tag">' + b.t + '</span><h3>' + b.n + '</h3><p>' + b.d + '</p><button type="button" data-raza="' + b.n + '">Ver detalles de ' + b.n + '</button>' + (SLUGS[b.n] ? '<p style="margin:14px 0 0"><a href="razas/' + SLUGS[b.n] + '/" style="color:var(--ink);font-weight:700;text-decoration:underline">Leer la guía de ' + b.n + ' →</a></p>' : '') + '</div></article>';
+  return '<article class="breed' + (b.img ? ' has-img' : '') + '">' + (b.img ? '<div class="bimg"><img src="' + b.img + '" alt="' + b.alt + '" loading="lazy" style="object-position:' + b.pos + '"></div>' : '') + '<div class="bbody">' + (b.x ? '<span class="xtag">Raza exclusiva</span>' : '') + '<span class="tag">' + b.t + '</span><h3>' + b.n + '</h3><p>' + b.d + '</p><button type="button" data-raza="' + b.n + '">Ver detalles de ' + b.n + '</button>' + '</div></article>';
 }).join("");
 var modal = document.getElementById("modal"), lastBtn = null;
 bEl.addEventListener("click", function (e) {
@@ -1243,7 +1257,7 @@ function openBreed(name) {
     '<div class="m3"><span><b>Enanismo natural</b><i>patitas cortas</i></span><span><b>Hipoalergénico</b><i>condición natural</i></span><span><b>' + (b.cl || 'Carácter tranquilo') + '</b><i>' + (b.c || 'mucho más tierno y muy apegado a su familia que un gato común') + '</i></span></div>' +
     '<dl>' + b.f.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join("") + '</dl>' +
     '<p class="price-note">El valor depende de la raza, el gatito y su línea genética. Te lo confirmamos por WhatsApp o llamada, sin costos ocultos.</p>' +
-    '<a class="btn btn-primary" href="' + wa(msg) + '" target="_blank" rel="noopener">Preguntar por ' + b.n + '</a></div>';
+    '<a class="btn btn-primary" href="' + wa(msg) + '" target="_blank" rel="noopener">Preguntar por ' + b.n + '</a>' + guideLinks(b) + '</div>';
   document.getElementById("sheet").classList.toggle("noimg", !b.img);
   modal.hidden = false;
   document.body.style.overflow = "hidden";
