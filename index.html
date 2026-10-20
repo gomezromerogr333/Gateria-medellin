@@ -868,7 +868,7 @@ var MORE = ["v10", "v7", "v13", "v9", "v27", "v3", "v4", "v5", "v17", "v18", "v1
 var VIDEOS = REEL.concat(MORE);
 var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function card(v, i) {
-  return '<button class="reel" type="button" data-i="' + i + '" style="background-image:url(vid/' + v + '.jpg)" aria-label="Ver video ' + (i + 1) + ' con sonido"><video muted loop playsinline preload="none" poster="vid/' + v + '.jpg" data-src="vid/' + v + '.mp4"></video><span class="tag">▶<span>&nbsp;Ver con sonido</span></span></button>';
+  return '<button class="reel" type="button" data-i="' + i + '" style="background-image:url(vid/' + v + '.jpg)" aria-label="Ver video ' + (i + 1) + ' con sonido"><video muted loop playsinline preload="none" poster="vid/' + v + '.jpg" data-src="vid/s/' + v + '.mp4"></video><span class="tag">▶<span>&nbsp;Ver con sonido</span></span></button>';
 }
 var reel = document.getElementById("reel"), vgrid = document.getElementById("vgrid");
 reel.innerHTML = REEL.map(function (v, i) { return card(v, i); }).join("");
@@ -879,7 +879,7 @@ var io = null, loader = null;
 /* cola de carga: videos en su calidad original, pero de a 2 y despues de que carguen las fotos */
 var vq = [], vact = 0, vready = false;
 function vpump() {
-  while (vready && vact < 2 && vq.length) {
+  while (vready && vact < 4 && vq.length) {
     (function (v) {
       if (v.getAttribute("src")) return;
       vact++;
@@ -899,7 +899,7 @@ function vload(v, first) {
   vpump();
 }
 function vstart() { vready = true; vpump(); }
-if (document.readyState === "complete") setTimeout(vstart, 400); else window.addEventListener("load", function () { setTimeout(vstart, 400); });
+vstart();
 function watch() {
   if (!("IntersectionObserver" in window)) return;
   cards.forEach(function (c) { var v = c.querySelector("video"); v.addEventListener("playing", function () { v.classList.add("on"); }); });
@@ -921,6 +921,7 @@ function watch() {
   cards.forEach(function (c) { io.observe(c); });
 }
 watch();
+REEL.slice(0, 4).forEach(function (id, i) { vload(cards[i].querySelector("video"), false); });
 /* Más videos: bloque compacto que se despliega en tamaño normal (misma animación de la galería) */
 var vtoggle = document.getElementById("vtoggle"), vwrap = vgrid.parentNode;
 function vflip(change) {
